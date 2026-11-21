@@ -1,50 +1,40 @@
-# projects
+# Góc công cụ nhỏ của byherk
 
-Nơi mình gom lại các dự án cá nhân, chạy trên GitHub Pages. Chỉ có HTML, CSS và JS thuần, không dùng framework, không cần build. Clone về là chạy được.
+Đây là nơi mình gom lại những công cụ nhỏ tự làm, phục vụ mấy việc lặt vặt hằng ngày như ghi thu chi, tạo hóa đơn, tóm tắt tài liệu, học từ vựng, tạo mã QR chuyển khoản...
 
-## Bên trong có gì
+**Vào xem tại: https://byherk.github.io/projects**
 
-```
-index.html             khung trang
-apps.json              danh sách dự án (thêm dự án chỉ cần sửa file này)
-assets/css/tokens.css  bộ token Dạ Quỳnh, lấy từ repo interactive-learning-garden
-assets/css/style.css   style của trang, chỉ dùng biến từ tokens.css
-assets/js/app.js       đọc apps.json rồi hiện ra các thẻ, có tìm kiếm và lọc theo danh mục
-assets/icons.svg       bộ icon Phosphor (MIT), mỗi icon là một <symbol>
-.nojekyll              để GitHub Pages không xử lý trang bằng Jekyll
-```
+## Có gì trong này?
 
-## Thêm dự án mới
+Các công cụ được chia theo nhóm cho dễ tìm:
 
-Mở `apps.json` và thêm một mục như sau:
+- **Tài chính**: sổ thu chi gia đình, tạo hóa đơn, tính lãi suất kép, tạo mã VietQR
+- **Soạn thảo**: tóm tắt tài liệu dài, lấy chữ từ ảnh chụp, đếm từ trong bài viết
+- **Học tập**: thẻ ghi nhớ từ vựng, đọc sách EPUB
+- **Năng suất**: đồng hồ tập trung, bảng theo dõi thói quen
+- **Tiện ích**: ghi âm nhật ký, nén ảnh
 
-```json
-{
-  "id": "ten-khong-dau",
-  "title": "Tên dự án",
-  "description": "Một câu mô tả.",
-  "category": "Tài chính",
-  "icon": "wallet",
-  "featured": false,
-  "url": "https://..."
-}
-```
+Công cụ nào ghi "Coming soon" là mình đang làm, chưa dùng được.
 
-Vài điều cần biết:
+## Dùng thế nào?
 
-- `id` viết thường, không dấu, các từ nối bằng gạch ngang.
-- Chưa có link thì để `url` trống. Thẻ sẽ hiện "Coming soon" và không bấm vào được.
-- Muốn dự án nằm trong mục "Selected projects" thì đặt `featured` là `true`.
-- `icon` là tên một `<symbol>` trong `assets/icons.svg`. Nếu thiếu icon, lên [phosphoricons.com](https://phosphoricons.com) tải bản Regular rồi bọc vào `<symbol>` giống mấy icon có sẵn.
+Bạn chỉ cần mở trang, chọn công cụ rồi dùng luôn. Không phải cài gì, không cần tạo tài khoản. Muốn tìm nhanh thì gõ vào ô tìm kiếm hoặc bấm chọn nhóm.
 
-## Chạy trên máy
+Mình làm phần lớn công cụ để chạy ngay trên trình duyệt của bạn, nên những thứ như số liệu thu chi hay ghi âm được giữ lại trên máy bạn, không gửi đi đâu cả.
 
-Trang lấy dữ liệu từ `apps.json` bằng `fetch`, nên mở thẳng file `index.html` sẽ không thấy dự án nào. Cần chạy một server tĩnh:
+## Góp ý
 
-```
-npx serve .
-```
+Bạn thấy công cụ nào lỗi hoặc muốn có thêm công cụ nào thì cứ [mở một Issue](https://github.com/byherk/projects/issues) để báo mình nhé.
 
-## Deploy
+<details>
+<summary>Dành cho người muốn xem phần kỹ thuật</summary>
 
-Vào **Settings → Pages**, chọn Source là **Deploy from a branch**, rồi chọn branch `main` và thư mục `/ (root)`. Lưu lại, đợi một lát là trang lên.
+Trang chỉ dùng HTML, CSS và JS thuần, không cần build.
+
+- Danh sách công cụ nằm trong `apps.json`. Muốn thêm công cụ mới thì sửa file này.
+- Để trống `url` thì thẻ hiện "Coming soon". Đặt `featured: true` thì công cụ nằm ở mục nổi bật.
+- Icon lấy từ [Phosphor Icons](https://phosphoricons.com) và nằm trong `assets/icons.svg`.
+- Chạy thử trên máy: `npx serve .` (không mở thẳng file `index.html` được).
+- Deploy: Settings → Pages → Deploy from a branch → `main` / `(root)`.
+
+</details>
