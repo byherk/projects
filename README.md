@@ -1,22 +1,22 @@
 # projects
 
-Trang danh mục dự án của byherk, đăng bằng GitHub Pages. Trang tĩnh, không cần build.
+Nơi mình gom lại các dự án cá nhân, chạy trên GitHub Pages. Chỉ có HTML, CSS và JS thuần, không dùng framework, không cần build. Clone về là chạy được.
 
-## Cấu trúc
+## Bên trong có gì
 
 ```
-index.html            Khung trang
-apps.json             Danh sách dự án (chỉ sửa file này khi thêm dự án)
-assets/css/tokens.css Token Dạ Quỳnh, chép từ repo interactive-learning-garden
-assets/css/style.css  Kiểu trang, chỉ dùng token
-assets/js/app.js      Đọc apps.json, vẽ thẻ, tìm kiếm, lọc danh mục
-assets/icons.svg      Icon Phosphor (MIT), mỗi icon một <symbol>
-.nojekyll             Báo GitHub Pages không chạy Jekyll
+index.html             khung trang
+apps.json              danh sách dự án (thêm dự án chỉ cần sửa file này)
+assets/css/tokens.css  bộ token Dạ Quỳnh, lấy từ repo interactive-learning-garden
+assets/css/style.css   style của trang, chỉ dùng biến từ tokens.css
+assets/js/app.js       đọc apps.json rồi hiện ra các thẻ, có tìm kiếm và lọc theo danh mục
+assets/icons.svg       bộ icon Phosphor (MIT), mỗi icon là một <symbol>
+.nojekyll              để GitHub Pages không xử lý trang bằng Jekyll
 ```
 
-## Thêm dự án
+## Thêm dự án mới
 
-Thêm một mục vào `apps.json`:
+Mở `apps.json` và thêm một mục như sau:
 
 ```json
 {
@@ -30,18 +30,21 @@ Thêm một mục vào `apps.json`:
 }
 ```
 
-- `url` rỗng: thẻ hiện "Coming soon", không bấm được.
-- `featured: true`: thẻ nằm ở mục "Selected projects".
-- `icon`: tên một `<symbol>` trong `assets/icons.svg`. Cần icon mới thì tải bản regular từ phosphoricons.com rồi thêm `<symbol>` cùng dạng.
+Vài điều cần biết:
 
-## Chạy thử trên máy
+- `id` viết thường, không dấu, các từ nối bằng gạch ngang.
+- Chưa có link thì để `url` trống. Thẻ sẽ hiện "Coming soon" và không bấm vào được.
+- Muốn dự án nằm trong mục "Selected projects" thì đặt `featured` là `true`.
+- `icon` là tên một `<symbol>` trong `assets/icons.svg`. Nếu thiếu icon, lên [phosphoricons.com](https://phosphoricons.com) tải bản Regular rồi bọc vào `<symbol>` giống mấy icon có sẵn.
 
-Trang đọc `apps.json` bằng `fetch`, nên phải mở qua máy chủ tĩnh (mở thẳng file sẽ không thấy dự án):
+## Chạy trên máy
+
+Trang lấy dữ liệu từ `apps.json` bằng `fetch`, nên mở thẳng file `index.html` sẽ không thấy dự án nào. Cần chạy một server tĩnh:
 
 ```
 npx serve .
 ```
 
-## Đăng lên GitHub Pages
+## Deploy
 
-Settings → Pages → Source: Deploy from a branch → `main` / `(root)`.
+Vào **Settings → Pages**, chọn Source là **Deploy from a branch**, rồi chọn branch `main` và thư mục `/ (root)`. Lưu lại, đợi một lát là trang lên.
