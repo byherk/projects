@@ -1,6 +1,6 @@
-# Góc công cụ nhỏ của HerK
+# Góc nhỏ của HerK
 
-Đây là nơi mình gom lại những công cụ nhỏ tự làm, phục vụ mấy việc lặt vặt hằng ngày như ghi thu chi, tạo hóa đơn, tóm tắt tài liệu, học từ vựng, tạo mã QR chuyển khoản...
+Đây là nơi mình gom lại những công cụ tự làm, phục vụ mấy việc lặt vặt hằng ngày như ghi thu chi, tạo hóa đơn, tóm tắt tài liệu, học từ vựng, tạo mã QR chuyển khoản...
 
 **Vào xem tại: https://byherk.github.io/projects**
 
