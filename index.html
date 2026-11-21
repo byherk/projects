@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Projects · byherk</title>
+		<meta name="description" content="Công cụ nhỏ và ứng dụng web cho việc hằng ngày." />
+
+		<!-- Áp chế độ Sáng/Tối trước khi vẽ trang để không nháy. Dùng chung khóa với Starlight trên byherk.com. -->
+		<script>
+			(function () {
+				var saved = null;
+				try {
+					saved = localStorage.getItem('starlight-theme');
+				} catch (e) {}
+				var theme =
+					saved === 'light' || saved === 'dark'
+						? saved
+						: matchMedia('(prefers-color-scheme: light)').matches
+							? 'light'
+							: 'dark';
+				document.documentElement.dataset.theme = theme;
+			})();
+		</script>
+
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&family=Noto+Serif:wght@600&display=swap"
+		/>
+		<link rel="stylesheet" href="assets/css/tokens.css" />
+		<link rel="stylesheet" href="assets/css/style.css" />
+		<script src="assets/js/app.js" defer></script>
+	</head>
+	<body>
+		<a class="skip-link" href="#main">Skip to main content</a>
+
+		<header class="site-header">
+			<div class="wrap">
+				<a class="logo" href="https://byherk.com/">byherk</a>
+				<button class="icon-button theme-toggle" type="button" aria-label="Switch to dark theme" title="Dark theme">
+					<svg class="icon when-light" aria-hidden="true"><use href="assets/icons.svg#moon" /></svg>
+					<svg class="icon when-dark" aria-hidden="true"><use href="assets/icons.svg#sun" /></svg>
+				</button>
+			</div>
+		</header>
+
+		<main id="main" class="wrap">
+			<h1 class="intro" lang="vi">Tuyển tập các công cụ và ứng dụng web hữu ích cho cuộc sống hàng ngày.</h1>
+
+			<div class="controls">
+				<div class="search" role="search">
+					<label class="sr-only" for="search">Search</label>
+					<svg class="icon" aria-hidden="true"><use href="assets/icons.svg#magnifying-glass" /></svg>
+					<input id="search" type="search" placeholder="Search projects" autocomplete="off" />
+					<button class="icon-button clear" type="button" aria-label="Clear" title="Clear" hidden>
+						<svg class="icon" aria-hidden="true"><use href="assets/icons.svg#x" /></svg>
+					</button>
+				</div>
+				<ul class="filters" aria-label="Categories"></ul>
+			</div>
+
+			<section class="section" id="selected" aria-labelledby="selected-title">
+				<h2 class="section-title" id="selected-title">Selected projects</h2>
+				<ul class="grid"></ul>
+			</section>
+
+			<section class="section" id="all" aria-labelledby="all-title">
+				<h2 class="section-title" id="all-title">More projects</h2>
+				<ul class="grid"></ul>
+			</section>
+
+			<div class="empty" id="empty" role="status" hidden>
+				<p></p>
+				<button class="text-button" type="button">Show all</button>
+			</div>
+
+			<noscript><p>Turn on JavaScript to see the projects.</p></noscript>
+		</main>
+
+		<footer class="site-footer">
+			<div class="wrap">© 2026 byherk</div>
+		</footer>
+
+		<template id="card-template">
+			<li>
+				<article class="card" lang="vi">
+					<div class="card-top">
+						<span class="card-icon"><svg class="icon" aria-hidden="true"><use /></svg></span>
+						<span class="card-category"></span>
+					</div>
+					<h3 class="card-title"></h3>
+					<p class="card-description"></p>
+					<span class="card-status" lang="en">Coming soon</span>
+				</article>
+			</li>
+		</template>
+	</body>
+</html>

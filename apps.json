@@ -1,0 +1,119 @@
+[
+  {
+    "id": "so-thu-chi",
+    "title": "Sổ thu chi gia đình",
+    "description": "Ghi chép thu chi sinh hoạt đơn giản, an toàn và lưu trữ riêng tư trực tiếp trên máy.",
+    "category": "Tài chính",
+    "icon": "wallet",
+    "featured": true,
+    "url": ""
+  },
+  {
+    "id": "tao-hoa-don",
+    "title": "Tạo hóa đơn nhanh",
+    "description": "Điền thông tin và xuất PDF hóa đơn bán hàng chuẩn mẫu cho người bán lẻ.",
+    "category": "Tài chính",
+    "icon": "receipt",
+    "featured": true,
+    "url": ""
+  },
+  {
+    "id": "tro-ly-tom-tat",
+    "title": "Trợ lý tóm tắt tài liệu",
+    "description": "Rút gọn văn bản hành chính, nghị định và bài báo dài thành các ý chính.",
+    "category": "Soạn thảo",
+    "icon": "article",
+    "featured": true,
+    "url": ""
+  },
+  {
+    "id": "bo-the-ghi-nho",
+    "title": "Bộ thẻ ghi nhớ từ vựng",
+    "description": "Phương pháp lặp lại ngắt quãng nhẹ nhàng giúp ghi nhớ từ vựng mỗi ngày.",
+    "category": "Học tập",
+    "icon": "cards",
+    "featured": true,
+    "url": ""
+  },
+  {
+    "id": "tinh-lai-suat-kep",
+    "title": "Tính lãi suất kép",
+    "description": "Xem tiền tiết kiệm và lợi nhuận tích lũy tăng trưởng theo thời gian với biểu đồ trực quan.",
+    "category": "Tài chính",
+    "icon": "trend-up",
+    "featured": false,
+    "url": ""
+  },
+  {
+    "id": "chuong-tap-trung",
+    "title": "Chuông tập trung thiền",
+    "description": "Đồng hồ Pomodoro 25 phút kết hợp tiếng chuông ngân tịnh tâm giúp làm việc sâu.",
+    "category": "Năng suất",
+    "icon": "bell",
+    "featured": false,
+    "url": ""
+  },
+  {
+    "id": "nhat-ky-thoai",
+    "title": "Nhật ký thoại ngoại tuyến",
+    "description": "Lưu nhanh suy nghĩ và ghi chú giọng nói trực tiếp trên bộ nhớ trình duyệt, không gửi lên đám mây.",
+    "category": "Tiện ích",
+    "icon": "microphone",
+    "featured": false,
+    "url": ""
+  },
+  {
+    "id": "trich-xuat-van-ban",
+    "title": "Trích xuất văn bản từ ảnh",
+    "description": "Nhận diện chữ viết tiếng Việt từ ảnh chụp tài liệu nhanh chóng ngay trên trình duyệt.",
+    "category": "Soạn thảo",
+    "icon": "scan",
+    "featured": false,
+    "url": ""
+  },
+  {
+    "id": "theo-doi-thoi-quen",
+    "title": "Bảng theo dõi thói quen",
+    "description": "Giao diện lưới chấm tối giản ghi nhận thói quen đọc sách, đi bộ và ngủ đúng giờ không gây áp lực.",
+    "category": "Năng suất",
+    "icon": "calendar-check",
+    "featured": false,
+    "url": ""
+  },
+  {
+    "id": "trinh-doc-epub",
+    "title": "Trình đọc sách EPUB",
+    "description": "Đọc sách điện tử không cần cài ứng dụng nặng nề, font chữ chuẩn Noto Serif và màu nền giấy êm mắt.",
+    "category": "Học tập",
+    "icon": "book-open",
+    "featured": false,
+    "url": ""
+  },
+  {
+    "id": "tao-vietqr",
+    "title": "Tạo mã VietQR nhanh",
+    "description": "Tạo mã QR chuyển khoản đúng chuẩn NAPAS có sẵn nội dung giao dịch và số tiền cố định.",
+    "category": "Tài chính",
+    "icon": "qr-code",
+    "featured": false,
+    "url": ""
+  },
+  {
+    "id": "chuyen-doi-webp",
+    "title": "Chuyển đổi ảnh sang WebP",
+    "description": "Nén và giảm dung lượng ảnh định dạng PNG/JPG sang WebP trực tiếp trên máy.",
+    "category": "Tiện ích",
+    "icon": "image",
+    "featured": false,
+    "url": ""
+  },
+  {
+    "id": "dem-tu-dinh-dang",
+    "title": "Đếm từ & định dạng văn bản",
+    "description": "Kiểm tra số từ, thời gian đọc và chuẩn hóa khoảng trắng cho bài viết blog.",
+    "category": "Soạn thảo",
+    "icon": "text-align-left",
+    "featured": false,
+    "url": ""
+  }
+]
