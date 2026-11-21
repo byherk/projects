@@ -1,0 +1,78 @@
+/*
+ * Token Dạ Quỳnh, chép từ src/styles/tokens.css của repo interactive-learning-garden
+ * (nguồn chuẩn). Đổi giá trị ở nguồn chuẩn trước rồi chép sang đây; chỉ giữ token trang này dùng.
+ */
+
+/* ---- Màu: chế độ Tối (mặc định khi chưa chọn) ---- */
+:root,
+:root[data-theme='dark'] {
+	--bh-color-text: #f2f1ea;
+	--bh-color-text-muted: #a8afa9;
+	--bh-color-bg: #0d1211;
+	--bh-color-secondary: #22201a;
+	--bh-color-primary: #7fc2ae;
+	--bh-color-primary-hover: #a3d6c6;
+	--bh-color-accent: #dc8ea4;
+	--bh-color-border: #2a302d;
+	--bh-color-border-strong: #6b746e;
+	color-scheme: dark;
+}
+
+/* ---- Màu: chế độ Sáng ---- */
+:root[data-theme='light'] {
+	--bh-color-text: #1b2420;
+	--bh-color-text-muted: #56605a;
+	--bh-color-bg: #fcfbf7;
+	--bh-color-secondary: #f3efe0;
+	--bh-color-primary: #2e6a5c;
+	--bh-color-primary-hover: #235347;
+	--bh-color-accent: #9e4a63;
+	--bh-color-border: #e4e1d6;
+	--bh-color-border-strong: #7d847d;
+	color-scheme: light;
+}
+
+/* ---- Không phụ thuộc chế độ màu ---- */
+:root {
+	--bh-font-sans: 'Be Vietnam Pro', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+	--bh-font-serif: 'Noto Serif', ui-serif, Georgia, serif;
+
+	--bh-text-display: clamp(2.25rem, 1.6rem + 3.2vw, 4rem);
+	--bh-text-h3: 1.375rem;
+	--bh-text-h4: 1.125rem;
+	--bh-text-small: 1rem;
+	--bh-text-caption: 0.875rem;
+
+	--bh-leading-display: 1.15;
+	--bh-leading-h3: 1.35;
+	--bh-leading-ui: 1.5;
+	--bh-tracking-tight: -0.01em;
+	--bh-tracking-label: 0.04em;
+
+	/* Thang khoảng cách: 4 · 8 · 12 · 16 · 24 · 32 · 48 · 64 · 96 px */
+	--bh-space-1: 0.25rem;
+	--bh-space-2: 0.5rem;
+	--bh-space-3: 0.75rem;
+	--bh-space-4: 1rem;
+	--bh-space-5: 1.5rem;
+	--bh-space-6: 2rem;
+	--bh-space-7: 3rem;
+	--bh-space-8: 4rem;
+	--bh-space-9: 6rem;
+
+	--bh-measure: 68ch;
+	--bh-radius: 6px;
+	--bh-radius-badge: 4px;
+	--bh-target-touch: 44px;
+	--bh-target-desktop: 40px;
+	--bh-underline-offset: 3px;
+	--bh-border-width: 1px;
+	--bh-rule-width: 2px;
+	--bh-focus-offset: 2px;
+
+	--bh-dur-fast: 150ms;
+	--bh-dur-base: 300ms;
+	--bh-dur-enter: 500ms;
+	--bh-dur-stagger: 60ms;
+	--bh-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
