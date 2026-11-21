@@ -25,16 +25,3 @@ Mình làm phần lớn công cụ để chạy ngay trên trình duyệt của 
 ## Góp ý
 
 Bạn thấy công cụ nào lỗi hoặc muốn có thêm công cụ nào thì cứ [mở một Issue](https://github.com/byherk/projects/issues) để báo mình nhé.
-
-<details>
-<summary>Dành cho người muốn xem phần kỹ thuật</summary>
-
-Trang chỉ dùng HTML, CSS và JS thuần, không cần build.
-
-- Danh sách công cụ nằm trong `apps.json`. Muốn thêm công cụ mới thì sửa file này.
-- Để trống `url` thì thẻ hiện "Coming soon". Đặt `featured: true` thì công cụ nằm ở mục nổi bật.
-- Icon lấy từ [Phosphor Icons](https://phosphoricons.com) và nằm trong `assets/icons.svg`.
-- Chạy thử trên máy: `npx serve .` (không mở thẳng file `index.html` được).
-- Deploy: Settings → Pages → Deploy from a branch → `main` / `(root)`.
-
-</details>
