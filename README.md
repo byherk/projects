@@ -1,27 +1,17 @@
-# Góc nhỏ của HerK
+# byherk / projects
 
-Đây là nơi mình gom lại những công cụ tự làm, phục vụ mấy việc lặt vặt hằng ngày như ghi thu chi, tạo hóa đơn, tóm tắt tài liệu, học từ vựng, tạo mã QR chuyển khoản...
+Một góc nhỏ để mình giới thiệu những dự án cá nhân, chủ yếu là các công cụ web gọn nhẹ, làm ra để việc thường ngày nhẹ nhàng hơn một chút.
 
-**Vào xem tại: https://byherk.github.io/projects**
+**[byherk.github.io/projects](https://byherk.github.io/projects)**
 
-## Có gì trong này?
+Các dự án đang được hoàn thiện và sẽ lần lượt có mặt ở đây. Cảm ơn bạn đã ghé qua, hẹn gặp lại khi mọi thứ sẵn sàng.
 
-Các công cụ được chia theo nhóm cho dễ tìm:
+<details>
+<summary>Ghi chú kỹ thuật</summary>
 
-- **Tài chính**: sổ thu chi gia đình, tạo hóa đơn, tính lãi suất kép, tạo mã VietQR
-- **Soạn thảo**: tóm tắt tài liệu dài, lấy chữ từ ảnh chụp, đếm từ trong bài viết
-- **Học tập**: thẻ ghi nhớ từ vựng, đọc sách EPUB
-- **Năng suất**: đồng hồ tập trung, bảng theo dõi thói quen
-- **Tiện ích**: ghi âm nhật ký, nén ảnh
+- Trang tĩnh viết bằng HTML, CSS và JS thuần, không cần build.
+- Danh sách dự án nằm trong `apps.json`.
+- Icon từ [Phosphor Icons](https://phosphoricons.com).
+- Chạy thử trên máy: `npx serve .`
 
-Công cụ nào ghi "Coming soon" là mình đang làm, chưa dùng được.
-
-## Dùng thế nào?
-
-Bạn chỉ cần mở trang, chọn công cụ rồi dùng luôn. Không phải cài gì, không cần tạo tài khoản. Muốn tìm nhanh thì gõ vào ô tìm kiếm hoặc bấm chọn nhóm.
-
-Mình làm phần lớn công cụ để chạy ngay trên trình duyệt của bạn, nên những thứ như số liệu thu chi hay ghi âm được giữ lại trên máy bạn, không gửi đi đâu cả.
-
-## Góp ý
-
-Bạn thấy công cụ nào lỗi hoặc muốn có thêm công cụ nào thì cứ [mở một Issue](https://github.com/byherk/projects/issues) để báo mình nhé.
+</details>
