@@ -12,10 +12,10 @@
 
 **Nhớ:** **T**arget → **A**rtifact → **S**tandard → **K**ey limits → **I**nterval → **N**ames → **G**ame plan
 
-**= WHY → WHAT → HOW GOOD → WHERE → WHEN → WHO → HOW**
+**Tương ứng 5W-2H:** WHY → WHAT → HOW GOOD → WHERE → WHEN → WHO → HOW
 
 | | 5W-2H | Câu hỏi |
-|---|---|---|
+| --- | --- | --- |
 | **T**arget | **WHY** | Làm để đạt mục tiêu gì, tạo ra giá trị gì? *(quan trọng nhất)* |
 | **A**rtifact | **WHAT** | Tạo hoặc sửa sản phẩm gì, bàn giao ở đâu? |
 | **S**tandard | **HOW GOOD** | Thế nào là PASS, cần bằng chứng gì? |
@@ -109,4 +109,4 @@ Owner không làm kỹ thuật thì báo đủ năm ý trên bằng lời thư�
 4. **Bảo mật:** Chỉ truy cập, xử lý và chia sẻ dữ liệu trong phạm vi được phép. Giảm thiểu dữ liệu nhạy cảm. Tiết lộ ra bên ngoài khi chưa được cấp quyền thì phải được Owner duyệt trước (luật 4).
 
 ---
-TASKING v1.3 · Tác giả: HerK · Giấy phép CC BY 4.0 · https://byherk.github.io/projects/tasking/
+TASKING v1.3 · Tác giả: HerK · Giấy phép CC BY 4.0 · <https://byherk.github.io/projects/tasking/>
