@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TASKING</title>
+<meta name="description" content="TASKING: biến yêu cầu thô thành prompt rõ ràng cho AI. Tác giả HerK, giấy phép CC BY 4.0.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect x='2' y='2' width='36' height='36' rx='9' fill='%232546d4'/%3E%3Cpath d='M10 11H30' stroke='white' stroke-width='4' stroke-linecap='round'/%3E%3Cpath d='M13 22L19 29L28 11' fill='none' stroke='%2334d399' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<!--
+  Ghi chú cho người làm trang (không hiện trên giao diện).
+  Nguyên tắc nội dung: giao diện chỉ có chữ cho người dùng. Luật vận hành cho AI, mã trạng thái,
+  ghi chú phiên bản nằm trong mã nguồn (file TASKING.md và các comment).
+  Tên thống nhất của 7 chữ: Mục tiêu (Target) · Sản phẩm (Artifact) · Đạt khi (Standard) ·
+  Giới hạn (Key limits) · Thời hạn (Interval) · Vai trò (Names) · Cách làm (Game plan).
+  Phần hiển thị gọi người dùng là "bạn"; chữ "Owner" chỉ dùng trong bản Instructions.
+
+  Nhật ký phiên bản:
+  v1.3.1 · 22/11/2026 · Đưa lên GitHub Pages, tách CSS/JS/Instructions ra file riêng.
+  v1.3 · 22/11/2026 · Trang dành cho người dùng: bỏ các mục Quy trình, Báo cáo, Tám luật,
+    Nguồn & dữ liệu khỏi giao diện (vẫn đầy đủ trong bản Instructions); đưa Trước & sau và Mẫu
+    prompt lên trước; thống nhất tên tiếng Việt cho 7 chữ; hướng dẫn chỗ dán Instructions
+    (ChatGPT, Claude, CLAUDE.md/AGENTS.md) và nút Xem nội dung; Instructions thêm định nghĩa
+    SELF-VERIFIED, cách báo cáo bằng lời thường, link ghi nguồn; sửa lỗi chọn loại việc bị ghi đè.
+  v1.2 · 11/11/2026 · Cập nhật Instructions: nguyên tắc Tương xứng, MAX-2 phân tích nguyên nhân gốc,
+    RISK-REVIEW phân biệt phê duyệt và đánh giá chuyên môn, ONE-LEAD cho phép làm song song.
+  v1.1 · 11/11/2026 · Ô Thử ngay ở đầu trang, hai cách dùng, giải thích thuật ngữ, 4 mẫu văn phòng.
+  v1.0 · 11/11/2026 · Bản công khai đầu tiên.
+-->
+<link rel="canonical" href="https://byherk.github.io/projects/tasking/">
+<link rel="stylesheet" href="style.css">
+<script src="app.js" defer></script>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="#thu-ngay" aria-label="TASKING, về ô Thử ngay">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="9" fill="var(--accent)"/><path d="M10 11H30" stroke="#fff" stroke-width="4" stroke-linecap="round"/><path d="M13 22L19 29L28 11" fill="none" stroke="#34d399" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <b>TASKING</b>
+    </a>
+    <nav class="toc" id="toc" aria-label="Mục lục"></nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero" id="thu-ngay" data-nav="Thử ngay">
+    <h1>Gõ việc bạn cần. Nhận <em>một yêu cầu rõ ràng</em> để giao cho AI.</h1>
+    <p class="lede">TASKING bổ sung những điều lời giao việc cho AI hay thiếu: mục tiêu, thế nào là đạt, điều không được làm, và yêu cầu AI tự kiểm trước khi gửi. Bạn không cần học phương pháp trước.</p>
+
+    <div class="builder">
+      <div>
+        <label class="f-label" for="b-raw">Bạn muốn AI làm gì? <span class="ex-flag" id="ex-flag" hidden>Ví dụ</span></label>
+        <textarea id="b-raw" rows="3"></textarea>
+        <div class="f-label" id="types-label">Loại việc <small>· gợi ý theo nội dung, bạn có thể chọn lại</small></div>
+        <div class="types" role="group" aria-labelledby="types-label" id="types"></div>
+        <div class="fields">
+          <div class="wide"><label class="f-label" for="b-target">Mục tiêu <small>(<span class="term" data-term="Target">Target</span>) · để làm gì, ai dùng kết quả?</small></label><input id="b-target" type="text"></div>
+          <div class="wide"><label class="f-label" for="b-art">Sản phẩm <small>(<span class="term" data-term="Artifact">Artifact</span>) · cần nhận về cái gì?</small></label><input id="b-art" type="text"></div>
+          <div><label class="f-label" for="b-lim">Giới hạn <small>(<span class="term" data-term="Key limits">Key limits</span>) · không được làm gì?</small></label><input id="b-lim" type="text"></div>
+          <div><label class="f-label" for="b-int">Thời hạn <small>(<span class="term" data-term="Interval">Interval</span>) · hạn chót, độ dài?</small></label><input id="b-int" type="text"></div>
+        </div>
+        <div class="row-btns">
+          <div class="mode" role="group" aria-label="Mức chi tiết">
+            <button type="button" id="m-quick" aria-pressed="true">Bản gọn</button>
+            <button type="button" id="m-full" aria-pressed="false" title="Thêm thời hạn, vai trò, và yêu cầu AI gửi bố cục trước khi làm">Bản đầy đủ</button>
+          </div>
+          <button type="button" class="linkbtn" id="b-example">Ví dụ khác</button>
+          <button type="button" class="linkbtn" id="b-clear">Xóa nội dung đã nhập</button>
+        </div>
+      </div>
+      <div class="out">
+        <div class="out-head"><h2>Prompt của bạn</h2><button type="button" class="copy" id="b-copy">Sao chép prompt</button></div>
+        <p class="hint key">Dán vào ChatGPT, Claude hoặc AI bạn dùng, rồi thay mọi chỗ [trong ngoặc vuông], nhất là dòng Nội dung, trước khi gửi.</p>
+        <pre id="b-out" aria-live="polite"></pre>
+        <p class="hint">Nội dung bạn gõ chỉ nằm trong trình duyệt, không gửi đi đâu.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="blk" id="truoc-sau" data-nav="Trước &amp; sau">
+    <div class="sec-head">
+      <h2>Cùng một việc, hai cách giao</h2>
+      <p>Ví dụ: làm dashboard báo cáo sếp từ file Excel bán hàng. Bên trái là cách giao thường gặp, bên phải là cách giao theo TASKING.</p>
+    </div>
+    <div class="ba">
+      <div class="card before">
+        <div class="lab">Trước: prompt thông thường</div>
+        <pre>Làm giúp mình cái dashboard bán hàng từ file Excel này để báo cáo sếp.</pre>
+        <div class="res"><strong>Điều thường xảy ra</strong>
+          <ul><li>AI tự chọn chỉ số, có khi không phải thứ sếp cần.</li><li>Thiếu dữ liệu thì AI có thể tự điền số.</li><li>Không ai kiểm tổng số có khớp file gốc.</li><li>Sửa đi sửa lại nhiều vòng.</li></ul>
+        </div>
+      </div>
+      <div class="card after">
+        <div class="lab">Sau: theo TASKING</div>
+        <pre id="after-body"></pre>
+        <div class="res"><strong>Điều thay đổi</strong>
+          <ul><li>AI biết sếp cần quyết định điều gì, nên có cơ sở chọn biểu đồ phù hợp.</li><li>AI được yêu cầu đối chiếu số liệu và báo rõ phần chưa kiểm.</li><li>Thiếu dữ liệu thì ghi "thiếu dữ liệu", không tự điền số.</li><li>Có điểm dừng: tối đa 2 vòng sửa.</li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="blk" id="mau-prompt" data-nav="Mẫu prompt">
+    <div class="sec-head">
+      <h2>Mẫu prompt, điền là dùng</h2>
+      <p>Chọn nhóm, chọn mẫu gần nhất, điền phần trong [ngoặc vuông], xóa dòng không cần. Mẫu dùng được ngay, không cần cài gì thêm; nếu đã cài bản Instructions, AI sẽ làm theo đầy đủ hơn.</p>
+    </div>
+    <div class="groups" role="group" aria-label="Nhóm mẫu" id="groups"></div>
+    <div class="tabs" role="tablist" id="tabs" aria-label="Chọn mẫu prompt"></div>
+    <div class="tpl" role="tabpanel">
+      <div class="tpl-head"><div><h3 id="tpl-title"></h3><p id="tpl-use"></p></div><button class="copy soft" type="button" id="tpl-copy">Sao chép mẫu</button></div>
+      <pre id="tpl-body"></pre>
+    </div>
+  </section>
+
+  <section class="blk" id="cach-dung" data-nav="Cách dùng">
+    <div class="sec-head">
+      <h2>Hai cách dùng TASKING</h2>
+      <p>Dùng lẻ từng lần khi cần, hoặc cài một lần để AI luôn làm việc theo cách này.</p>
+    </div>
+    <div class="ways">
+      <div class="way">
+        <h3>Dùng ngay</h3>
+        <p>Hợp với việc lẻ và người mới dùng AI.</p>
+        <ol><li>Gõ việc vào ô Thử ngay.</li><li>Điền thêm vài ô nếu muốn.</li><li>Sao chép prompt, dán vào AI.</li></ol>
+        <div class="acts"><a class="btn ghost" href="#thu-ngay">Mở ô Thử ngay</a></div>
+      </div>
+      <div class="way">
+        <h3>Cài một lần</h3>
+        <p>Hợp với người dùng AI hằng ngày hoặc làm dự án dài. Bản <span class="term" data-term="Instructions">Instructions</span> dài hơn 9.000 ký tự. Cài xong, AI sẽ:</p>
+        <ul>
+          <li>tự quyết việc nhỏ và ghi rõ điều nó giả định;</li>
+          <li>hỏi bạn trước khi làm việc tốn kém hoặc khó hoàn tác;</li>
+          <li>tự kiểm trước khi báo xong, nói rõ phần nào chưa kiểm;</li>
+          <li>dừng sau 2 lần sửa nếu vẫn chưa đạt, rồi đề xuất hướng khác.</li>
+        </ul>
+        <h4>Dán vào đâu</h4>
+        <ul>
+          <li><strong>Claude:</strong> tạo một Project, dán vào phần Instructions của Project.</li>
+          <li><strong>Claude Code, Codex, Cursor:</strong> dán vào file CLAUDE.md hoặc AGENTS.md ở thư mục gốc dự án. "Nguồn chuẩn" trong bản này là các file dự án bạn chỉ định, ví dụ README hoặc chính file đó.</li>
+          <li><strong>ChatGPT:</strong> ô Custom instructions không đủ chỗ (tối đa 1.500 ký tự ở gói miễn phí, 5.000 ở gói trả phí). Hãy dán vào đầu một cuộc trò chuyện mới.</li>
+        </ul>
+        <div class="acts"><button class="btn" type="button" id="full-copy">Sao chép Instructions</button></div>
+        <details class="full-view" id="full-view"><summary>Xem nội dung</summary><pre id="full-pre"></pre></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="blk" id="bay-chu" data-nav="Bảy chữ">
+    <div class="sec-head">
+      <h2>Bảy chữ, bảy câu hỏi trước khi giao việc</h2>
+      <p>Việc nhỏ chỉ cần vài chữ đầu; việc lớn nên có đủ.</p>
+    </div>
+    <div class="stack" id="stack" aria-label="Bảy câu hỏi"></div>
+    <p class="note">Bạn là người giao việc và duyệt kết quả. AI không được làm những điều bạn ghi ở Giới hạn, kể cả khi làm vậy nhanh hơn.</p>
+  </section>
+
+  <section class="blk" id="ve-tasking" data-nav="Về TASKING">
+    <div class="sec-head"><h2>TASKING đến từ đâu</h2></div>
+    <div class="prose">
+      <p>Từng ý trong TASKING không mới. Bộ câu hỏi 5W-2H (Why, What, Where, When, Who, How, How much) có từ lâu trong quản lý chất lượng; TASKING đổi How much thành "thế nào là đạt" và đưa ngân sách vào Giới hạn. Tiêu chí "thế nào là xong" (Definition of done) và việc kiểm tra theo mức rủi ro cũng đã quen thuộc.</p>
+      <p>Phần riêng của TASKING là gom tất cả vào một trang ngắn, đọc là làm theo được. Bộ quy tắc đã được dùng cho tài liệu học, trang mô phỏng tương tác và dashboard.</p>
+      <p>Bạn dùng thử và thấy chỗ nào chưa ổn, hãy góp ý qua LinkedIn của tác giả.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div>
+      <h4>TASKING</h4>
+      <p>Tác giả: <strong style="color:var(--ink)">HerK</strong></p>
+      <p>LinkedIn: <a href="https://www.linkedin.com/in/quynhanhnguyen0805/" rel="noopener">linkedin.com/in/quynhanhnguyen0805</a></p>
+    </div>
+    <div>
+      <h4>Giấy phép</h4>
+      <p><a href="https://creativecommons.org/licenses/by/4.0/deed.vi" rel="noopener license">CC BY 4.0</a>. Bạn được dùng, chỉnh sửa và chia sẻ, kể cả cho mục đích thương mại, miễn là ghi tên tác giả HerK và dẫn link về trang này.</p>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+</body>
+</html>

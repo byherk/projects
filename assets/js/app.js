@@ -1,13 +1,16 @@
 // Trang Projects: đọc apps.json, vẽ thẻ, tìm kiếm và lọc theo danh mục.
-// Thêm dự án mới: chỉ sửa apps.json. Để "url" rỗng thì thẻ hiện "Coming soon" và không bấm được.
+// Thêm dự án mới: thêm một mục vào apps.json. Để "url" rỗng thì thẻ hiện "Coming soon" và không bấm được.
 
 const ICONS = 'assets/icons.svg';
 const ALL = 'All';
+// Ít dự án thì tìm kiếm và lọc chỉ thêm rối: dưới ngưỡng này khối .controls bị ẩn.
+const MIN_PROJECTS_FOR_CONTROLS = 6;
 
 const state = { apps: [], category: ALL, query: '' };
 
 const $ = (selector) => document.querySelector(selector);
 const els = {
+	controls: $('.controls'),
 	search: $('#search'),
 	clear: $('.search .clear'),
 	filters: $('.filters'),
@@ -33,7 +36,7 @@ function createCard(app, index) {
 	const item = els.template.content.firstElementChild.cloneNode(true);
 	const card = item.querySelector('.card');
 	card.style.setProperty('--i', index);
-	item.querySelector('use').setAttribute('href', `${ICONS}#${app.icon || 'article'}`);
+	item.querySelector('use').setAttribute('href', `${ICONS}#${app.icon || 'list-checks'}`);
 	item.querySelector('.card-category').textContent = app.category;
 	item.querySelector('.card-description').textContent = app.description;
 
@@ -41,7 +44,8 @@ function createCard(app, index) {
 	if (app.url) {
 		const link = document.createElement('a');
 		link.href = app.url;
-		link.textContent = `${app.title} ↗`;
+		// Chỉ link ra trang khác mới có mũi tên; link nội bộ (tasking/) thì không.
+		link.textContent = /^https?:/.test(app.url) ? `${app.title} ↗` : app.title;
 		title.append(link);
 		card.classList.add('is-link');
 		item.querySelector('.card-status').remove();
@@ -171,6 +175,7 @@ async function init() {
 		els.empty.querySelector('button').hidden = true;
 		return;
 	}
+	els.controls.hidden = state.apps.length < MIN_PROJECTS_FOR_CONTROLS;
 	renderFilters();
 	render(!matchMedia('(prefers-reduced-motion: reduce)').matches);
 }
