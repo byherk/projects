@@ -101,6 +101,12 @@ a {
 	text-decoration: none;
 }
 
+.header-actions {
+	display: flex;
+	align-items: center;
+	gap: var(--bh-space-2);
+}
+
 .icon-button {
 	display: inline-grid;
 	place-items: center;
@@ -117,6 +123,14 @@ a {
 
 .icon-button:hover {
 	border-color: var(--bh-color-primary);
+}
+
+/* Nút ngôn ngữ: chữ mã ngôn ngữ đích (EN/VI), không icon */
+.lang-toggle {
+	font-family: inherit;
+	font-size: var(--bh-text-caption);
+	font-weight: 600;
+	letter-spacing: var(--bh-tracking-label);
 }
 
 /* Nút Sáng/Tối: hiện mặt trăng ở chế độ Sáng, mặt trời ở chế độ Tối */
@@ -316,6 +330,24 @@ main {
 	position: absolute;
 	inset: 0;
 	border-radius: var(--bh-radius);
+}
+
+/* Nhãn ngôn ngữ của dự án, nằm dưới tiêu đề thẻ. Không nổi lên trên vùng bấm phủ thẻ, để cả thẻ vẫn bấm được (Sổ tay 5.3). */
+.card-langs {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--bh-space-2);
+}
+
+.card-lang {
+	padding: var(--bh-badge-pad);
+	border: var(--bh-border-width) solid var(--bh-color-border-strong);
+	border-radius: var(--bh-radius-badge);
+	font-size: var(--bh-text-badge);
+	font-weight: 600;
+	letter-spacing: var(--bh-tracking-label);
+	color: var(--bh-color-text-muted);
+	text-decoration: none;
 }
 
 .card-description {

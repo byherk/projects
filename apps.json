@@ -1,11 +1,18 @@
-[
-  {
-    "id": "tasking",
-    "title": "TASKING",
-    "description": "Biến yêu cầu thô thành prompt rõ ràng cho AI, kèm mẫu dùng ngay và bộ hướng dẫn giao việc.",
-    "category": "Làm việc với AI",
-    "icon": "list-checks",
-    "featured": true,
-    "url": "tasking/"
-  }
-]
+{
+  "categories": { "ai": { "vi": "Làm việc với AI", "en": "Working with AI" } },
+  "apps": [
+    {
+      "id": "tasking",
+      "title": "TASKING",
+      "description": {
+        "vi": "Biến yêu cầu còn thô thành prompt rõ ràng cho AI. Có sẵn mẫu dùng ngay và hướng dẫn giao việc.",
+        "en": "Turn a rough request into a clear prompt for AI. Comes with ready-to-use templates and a guide to delegating tasks."
+      },
+      "category": "ai",
+      "lang": ["vi"],
+      "icon": "list-checks",
+      "featured": true,
+      "url": "tasking/"
+    }
+  ]
+}

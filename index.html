@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="vi">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>Projects · byherk</title>
+		<title>Dự án · byherk</title>
 		<meta name="description" content="Công cụ nhỏ và ứng dụng web cho việc hằng ngày." />
 
 		<!-- Áp chế độ Sáng/Tối trước khi vẽ trang để không nháy. Dùng chung khóa với Starlight trên byherk.com. -->
@@ -23,6 +23,34 @@
 			})();
 		</script>
 
+		<!-- Chọn ngôn ngữ trước khi vẽ trang: ?lang=vi|en, rồi lựa chọn đã lưu, rồi ngôn ngữ trình duyệt. app.js đọc lại từ html lang. -->
+		<script>
+			(function () {
+				var lang = null;
+				try {
+					var fromUrl = new URLSearchParams(location.search).get('lang');
+					if (fromUrl === 'vi' || fromUrl === 'en') lang = fromUrl;
+				} catch (e) {}
+				if (!lang) {
+					try {
+						var saved = localStorage.getItem('byherk-lang');
+						if (saved === 'vi' || saved === 'en') lang = saved;
+					} catch (e) {}
+				}
+				if (!lang) {
+					var prefs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ''];
+					lang = 'en';
+					for (var i = 0; i < prefs.length; i++) {
+						if (/^vi/i.test(prefs[i])) {
+							lang = 'vi';
+							break;
+						}
+					}
+				}
+				document.documentElement.lang = lang;
+			})();
+		</script>
+
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
@@ -34,49 +62,60 @@
 		<script src="assets/js/app.js" defer></script>
 	</head>
 	<body>
-		<a class="skip-link" href="#main">Skip to main content</a>
+		<a class="skip-link" href="#main" data-i18n="skipLink">Chuyển đến nội dung chính</a>
 
 		<header class="site-header">
 			<div class="wrap">
 				<a class="logo" href="https://byherk.com/">byherk</a>
-				<button class="icon-button theme-toggle" type="button" aria-label="Switch to dark theme" title="Dark theme">
-					<svg class="icon when-light" aria-hidden="true"><use href="assets/icons.svg#moon" /></svg>
-					<svg class="icon when-dark" aria-hidden="true"><use href="assets/icons.svg#sun" /></svg>
-				</button>
+				<div class="header-actions">
+					<button class="icon-button lang-toggle" type="button" lang="en" aria-label="English" title="English">EN</button>
+					<button class="icon-button theme-toggle" type="button" aria-label="Chuyển sang chế độ Tối" title="Chế độ Tối">
+						<svg class="icon when-light" aria-hidden="true"><use href="assets/icons.svg#moon" /></svg>
+						<svg class="icon when-dark" aria-hidden="true"><use href="assets/icons.svg#sun" /></svg>
+					</button>
+				</div>
 			</div>
 		</header>
 
 		<main id="main" class="wrap">
-			<h1 class="intro" lang="vi">Tuyển tập các công cụ và ứng dụng web hữu ích cho cuộc sống hàng ngày.</h1>
+			<h1 class="intro" data-i18n="intro">Tuyển tập các công cụ và ứng dụng web hữu ích cho cuộc sống hàng ngày.</h1>
 
 			<div class="controls">
 				<div class="search" role="search">
-					<label class="sr-only" for="search">Search</label>
+					<label class="sr-only" for="search" data-i18n="searchLabel">Tìm kiếm</label>
 					<svg class="icon" aria-hidden="true"><use href="assets/icons.svg#magnifying-glass" /></svg>
-					<input id="search" type="search" placeholder="Search projects" autocomplete="off" />
-					<button class="icon-button clear" type="button" aria-label="Clear" title="Clear" hidden>
+					<input id="search" type="search" placeholder="Tìm dự án" data-i18n-placeholder="searchPlaceholder" autocomplete="off" />
+					<button
+						class="icon-button clear"
+						type="button"
+						aria-label="Xóa"
+						title="Xóa"
+						data-i18n-aria-label="clear"
+						data-i18n-title="clear"
+						hidden
+					>
 						<svg class="icon" aria-hidden="true"><use href="assets/icons.svg#x" /></svg>
 					</button>
 				</div>
-				<ul class="filters" aria-label="Categories"></ul>
+				<ul class="filters" aria-label="Danh mục" data-i18n-aria-label="categories"></ul>
 			</div>
 
 			<section class="section" id="selected" aria-labelledby="selected-title">
-				<h2 class="section-title" id="selected-title">Selected projects</h2>
+				<h2 class="section-title" id="selected-title" data-i18n="selected">Dự án tiêu biểu</h2>
 				<ul class="grid"></ul>
 			</section>
 
 			<section class="section" id="all" aria-labelledby="all-title">
-				<h2 class="section-title" id="all-title">More projects</h2>
+				<h2 class="section-title" id="all-title">Dự án khác</h2>
 				<ul class="grid"></ul>
 			</section>
 
 			<div class="empty" id="empty" role="status" hidden>
 				<p></p>
-				<button class="text-button" type="button">Show all</button>
+				<button class="text-button" type="button" data-i18n="showAll">Xem tất cả</button>
 			</div>
 
-			<noscript><p>Turn on JavaScript to see the projects.</p></noscript>
+			<noscript><p>Bật JavaScript để xem các dự án.</p></noscript>
 		</main>
 
 		<footer class="site-footer">
@@ -85,14 +124,15 @@
 
 		<template id="card-template">
 			<li>
-				<article class="card" lang="vi">
+				<article class="card">
 					<div class="card-top">
 						<span class="card-icon"><svg class="icon" aria-hidden="true"><use /></svg></span>
 						<span class="card-category"></span>
 					</div>
 					<h3 class="card-title"></h3>
+					<div class="card-langs"></div>
 					<p class="card-description"></p>
-					<span class="card-status" lang="en">Coming soon</span>
+					<span class="card-status" data-i18n="comingSoon">Sắp có</span>
 				</article>
 			</li>
 		</template>
