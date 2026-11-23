@@ -314,7 +314,7 @@ const CONTENT = {
       caution: '<b>What’s simplified:</b> Every 4D figure on this page is drawn through a projection onto a 2D screen; the 3D balls are shaded to suggest volume, not photographed from 4D. In the slice simulation, the cut moves through an object that stays still, which is the same as the object moving through the cut in the opposite direction. <b>A 4D object or creature appearing and vanishing in our 3D world is a thought experiment based on geometry, not something anyone has observed.</b>',
 
       /* Chân trang */
-      creditNote: 'This content was written with help from AI tools, so it may contain mistakes. The page is for reference only and is provided as is, without warranty; when accuracy matters, check a textbook or another authoritative source.<br>All rights reserved. You’re welcome to use this page for learning and to share the link. Please ask the author before copying, republishing, or adapting its content or code.',
+      creditNote: 'All rights reserved.<br>This content was created with the assistance of AI tools and may contain errors. It is provided for informational purposes only.<br>No part of this site may be reproduced, distributed, or modified without prior written permission.',
       assumptions: 'Simulation assumptions: four-dimensional Euclidean geometry; balls of radius 1; a tesseract with its 16 vertices at (±1, ±1, ±1, ±1); the arch is the union of 129 4D balls of radius 0.34; every projection is a perspective projection.',
       sources: 'References:',
     },
