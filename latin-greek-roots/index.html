@@ -92,9 +92,9 @@ h3{font-size:18px;margin:22px 0 12px}.wordgrid{display:grid;grid-template-column
 .credit-head{display:flex;align-items:center;justify-content:space-between;gap:8px}
 .credit-toggle{display:inline-grid;place-items:center;width:28px;height:28px;padding:0;border:0;border-radius:6px;background:none;color:inherit;opacity:.5;cursor:pointer}
 .credit-toggle:hover,.credit-toggle:focus-visible{opacity:1}
-.credit-toggle svg{width:16px;height:16px;transition:transform .15s ease}
-.credit-box.is-collapsed .credit-toggle svg{transform:rotate(180deg)}
-@media (prefers-reduced-motion:reduce){.credit-toggle svg{transition:none}}
+.credit-chevron{width:7px;height:7px;margin-top:3px;border-left:1.5px solid currentColor;border-top:1.5px solid currentColor;transform:rotate(45deg);transition:transform .15s ease}
+.credit-box.is-collapsed .credit-chevron{margin-top:-3px;transform:rotate(225deg)}
+@media (prefers-reduced-motion:reduce){.credit-chevron{transition:none}}
 .credit-box{margin-top:0}.credit-box .credits{margin-top:10px}.credit-box .credit-note{margin:4px 0 0}
 
 .credit-note a{color:var(--accent);text-underline-offset:2px}
@@ -147,7 +147,7 @@ h3{font-size:18px;margin:22px 0 12px}.wordgrid{display:grid;grid-template-column
 <main class="main" id="lesson"></main>
 </div>
 <footer class="footer" aria-label="Bản quyền và nguồn hình ảnh">
-<div class="credit-box"><div class="credit-head"><span>© 2026 HerK</span><button class="credit-toggle" type="button" aria-expanded="true" aria-controls="credit-body" aria-label="Thu gọn" title="Thu gọn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 15-6-6-6 6"/></svg></button></div><div id="credit-body"><p class="credit-note">Nội dung được soạn với sự hỗ trợ của các công cụ AI nên có thể có sai sót. Trang chỉ dùng để tham khảo, được cung cấp nguyên trạng và không kèm bảo đảm; khi cần độ chính xác, hãy đối chiếu với từ điển hoặc nguồn chính thống.<br>Nội dung và mã nguồn của trang theo giấy phép <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.vi" rel="noopener license">CC BY-NC-ND 4.0</a>: bạn được đọc, tham khảo và chia sẻ nguyên vẹn khi ghi tên tác giả HerK và dẫn link về trang này; không dùng cho mục đích thương mại và không phát hành bản đã chỉnh sửa.<br>Hình ảnh thuộc về tác giả của từng ảnh, theo giấy phép riêng ghi trong mục “Nguồn tư liệu &amp; giấy phép hình ảnh”; không thuộc giấy phép CC BY-NC-ND 4.0 của trang.</p>
+<div class="credit-box"><div class="credit-head"><span>© 2026 HerK</span><button class="credit-toggle" type="button" aria-expanded="true" aria-controls="credit-body" aria-label="Thu gọn" title="Thu gọn"><span class="credit-chevron" aria-hidden="true"></span></button></div><div id="credit-body"><p class="credit-note">Nội dung được soạn với sự hỗ trợ của các công cụ AI nên có thể có sai sót. Trang chỉ dùng để tham khảo, được cung cấp nguyên trạng và không kèm bảo đảm; khi cần độ chính xác, hãy đối chiếu với từ điển hoặc nguồn chính thống.<br>Nội dung và mã nguồn của trang theo giấy phép <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.vi" rel="noopener license">CC BY-NC-ND 4.0</a>: bạn được đọc, tham khảo và chia sẻ nguyên vẹn khi ghi tên tác giả HerK và dẫn link về trang này; không dùng cho mục đích thương mại và không phát hành bản đã chỉnh sửa.<br>Hình ảnh thuộc về tác giả của từng ảnh, theo giấy phép riêng ghi trong mục “Nguồn tư liệu &amp; giấy phép hình ảnh”; không thuộc giấy phép CC BY-NC-ND 4.0 của trang.</p>
 <details class="credits">
 <summary>Nguồn tư liệu &amp; giấy phép hình ảnh (Wikimedia Commons)</summary>
 <div class="credits-body">
