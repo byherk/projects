@@ -1,5 +1,8 @@
 {
-  "categories": { "ai": { "vi": "Làm việc với AI", "en": "Working with AI" } },
+  "categories": {
+    "ai": { "vi": "Làm việc với AI", "en": "Working with AI" },
+    "english": { "vi": "Học tiếng Anh", "en": "Learning English" }
+  },
   "apps": [
     {
       "id": "tasking",
@@ -13,6 +16,48 @@
       "icon": "list-checks",
       "featured": true,
       "url": "tasking/"
+    },
+    {
+      "id": "everyday-verbs",
+      "title": "Everyday Verbs",
+      "description": {
+        "vi": "Xem hoạt cảnh từng bước để hiểu 545 động từ tiếng Anh. Có sẵn cụm động từ, ví dụ song ngữ và cách phân biệt các từ gần nghĩa.",
+        "en": "Watch step-by-step scenes to understand 545 English verbs. Includes phrasal verbs, English–Vietnamese examples, and comparisons of similar words."
+      },
+      "category": "english",
+      "lang": ["vi"],
+      "icon": "person-simple-run",
+      "featured": false,
+      "url": "everyday-verbs/"
+    },
+    {
+      "id": "everyday-prepositions",
+      "title": "Everyday Prepositions",
+      "description": {
+        "vi": "Xem hoạt cảnh để hiểu 126 giới từ tiếng Anh. Có sẵn ví dụ song ngữ và cách phân biệt các giới từ dễ nhầm.",
+        "en": "Watch scenes to understand 126 English prepositions. Includes English–Vietnamese examples and comparisons of easily confused prepositions."
+      },
+      "category": "english",
+      "lang": ["vi"],
+      "icon": "map-pin-line",
+      "featured": false,
+      "url": "everyday-prepositions/"
+    },
+    {
+      "id": "latin-greek-roots",
+      "title": {
+        "vi": "120 gốc từ Latin & Greek",
+        "en": "120 Latin & Greek Roots"
+      },
+      "description": {
+        "vi": "Khám phá 120 gốc từ Latin và Hy Lạp qua ảnh minh họa và phát âm Anh-Mỹ. Có sẵn ví dụ để nhớ từ qua ngữ cảnh.",
+        "en": "Explore 120 Latin and Greek roots through photos and American English audio. Includes example sentences to help you remember words in context."
+      },
+      "category": "english",
+      "lang": ["vi"],
+      "icon": "plant",
+      "featured": false,
+      "url": "latin-greek-roots/"
     }
   ]
 }

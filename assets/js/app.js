@@ -16,7 +16,7 @@
 const STRINGS = {
 	vi: {
 		pageTitle: 'Dự án · byherk',
-		metaDescription: 'Công cụ nhỏ và ứng dụng web cho việc hằng ngày.',
+		metaDescription: 'Công cụ nhỏ và ứng dụng web cho việc hằng ngày, gồm cả các trang học tiếng Anh.',
 		skipLink: 'Chuyển đến nội dung chính',
 		intro: 'Tuyển tập các công cụ và ứng dụng web hữu ích cho cuộc sống hàng ngày.',
 		themeToDark: 'Chuyển sang chế độ Tối',
