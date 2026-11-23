@@ -1,11 +1,24 @@
 # byherk / projects
 
-A small corner of the web where I share my personal projects, mostly simple web tools for making everyday tasks a little easier, plus a few pages for learning English.
+Simple web tools and learning pages I've made and want to share.
 
 **[byherk.github.io/projects](https://byherk.github.io/projects)**
 
-So far: TASKING (turn a rough request into a clear prompt for AI) and three pages for learning English: Everyday Verbs, Everyday Prepositions and 120 Latin & Greek Roots. More projects will appear here one by one. Thanks for stopping by.
+## What's here
 
-TASKING is © HerK under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). The three English learning pages are © HerK under [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/): free to read and share unchanged with credit, but not for commercial use or modified versions. The photos on the Latin & Greek Roots page keep their own authors and licenses, credited on the page. The rest of the site code (the catalog page, styles and scripts) is © HerK, all rights reserved. See [LICENSE](LICENSE) for the full terms.
+- **[TASKING](https://byherk.github.io/projects/tasking/)**: turn a rough request into a clear prompt for AI.
+- **[Everyday Verbs](https://byherk.github.io/projects/everyday-verbs/)**: learn English verbs through short animated scenes.
+- **[Everyday Prepositions](https://byherk.github.io/projects/everyday-prepositions/)**: learn English prepositions the same way.
+- **[120 Latin & Greek Roots](https://byherk.github.io/projects/latin-greek-roots/)**: learn word roots with photos and audio.
 
-These projects were made with the help of AI tools. They may contain errors and are provided as is, for reference only, without warranty.
+More will come over time. Thanks for stopping by.
+
+## Using these projects
+
+- **TASKING**: free to use, change and share, even commercially. Just credit HerK.
+- **The English learning pages**: free to read and share as they are, with credit. Please don't sell them or share edited copies.
+- **Everything else in this repo**: please ask before reusing it.
+
+I made these with help from AI tools, so mistakes can happen. Use them as a reference, not as the final word.
+
+Full terms are in [LICENSE](LICENSE).
