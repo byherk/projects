@@ -42,7 +42,6 @@
 	--bh-text-h4: 1.125rem;
 	--bh-text-small: 1rem;
 	--bh-text-caption: 0.875rem;
-	--bh-text-badge: 0.75rem;
 
 	--bh-leading-display: 1.15;
 	--bh-leading-h3: 1.35;
@@ -64,7 +63,6 @@
 	--bh-measure: 68ch;
 	--bh-radius: 6px;
 	--bh-radius-badge: 4px;
-	--bh-badge-pad: 1px 6px;
 	--bh-target-touch: 44px;
 	--bh-target-desktop: 40px;
 	--bh-underline-offset: 3px;

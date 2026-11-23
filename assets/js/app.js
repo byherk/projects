@@ -2,8 +2,11 @@
 //
 // apps.json có dạng { "categories": {...}, "apps": [...] }.
 // - categories: khóa danh mục → nhãn, ví dụ "ai": { "vi": "Làm việc với AI", "en": "Working with AI" }.
-// - apps: mỗi mục gồm id, title, description, category (khóa trong categories), lang (mã ngôn ngữ của dự án, ví dụ ["vi"]),
+// - apps: mỗi mục gồm id, title, description, category (khóa trong categories), lang (các ngôn ngữ dự án được viết, ví dụ ["vi"]),
 //   icon, featured, url.
+// - lang quyết định dự án hiện ở bản ngôn ngữ nào: chỉ hiện khi lang chứa ngôn ngữ giao diện đang chọn. Chủ đề không còn dự án
+//   thì ẩn khỏi bộ lọc. Mục không khai báo lang được coi là dùng được ở mọi ngôn ngữ. Nếu lang chỉ có một phần tử,
+//   link của thẻ được đặt hreflang theo phần tử đó.
 // - title và description: chuỗi (dùng chung cho mọi ngôn ngữ) hoặc { vi, en }; hàm pick() chọn đúng bản.
 // Thêm dự án mới: thêm một mục vào apps. Để "url" rỗng thì thẻ hiện "Sắp có" và không bấm được.
 //
@@ -34,7 +37,7 @@ const STRINGS = {
 		loadError: 'Phần này chưa tải được. Bạn thử tải lại trang nhé.',
 		comingSoon: 'Sắp có',
 		external: '(trang ngoài)',
-		langName: { vi: 'Tiếng Việt', en: 'Tiếng Anh' },
+		langName: 'Tiếng Việt',
 	},
 	en: {
 		pageTitle: 'Projects · byherk',
@@ -59,7 +62,7 @@ const STRINGS = {
 		loadError: 'This part didn’t load. Try refreshing the page.',
 		comingSoon: 'Coming soon',
 		external: '(external site)',
-		langName: { vi: 'Vietnamese', en: 'English' },
+		langName: 'English',
 	},
 };
 
@@ -136,17 +139,17 @@ function createCard(app, index) {
 		title.textContent = titleText;
 		item.querySelector('.card-status').textContent = t().comingSoon;
 	}
-
-	const langs = item.querySelector('.card-langs');
-	for (const code of app.lang ?? []) {
-		const badge = document.createElement('abbr');
-		badge.className = 'card-lang';
-		badge.title = t().langName[code] ?? code;
-		badge.textContent = code.toUpperCase();
-		langs.append(badge);
-	}
-	if (!langs.children.length) langs.remove();
 	return item;
+}
+
+// Dự án hiện ra ở ngôn ngữ đang chọn: lang phải chứa ngôn ngữ đó (không khai báo lang thì hiện ở mọi ngôn ngữ).
+const visibleApps = () => state.apps.filter((app) => !app.lang?.length || app.lang.includes(lang));
+
+// Tìm kiếm và lọc chỉ hiện khi đủ dự án; đếm theo số dự án đang hiện ra, và bỏ bộ lọc nếu chủ đề đã chọn không còn dự án.
+function updateControls() {
+	const apps = visibleApps();
+	els.controls.hidden = apps.length < MIN_PROJECTS_FOR_CONTROLS;
+	if (state.category !== ALL && !apps.some((app) => app.category === state.category)) state.category = ALL;
 }
 
 function fillGrid(section, apps, animate) {
@@ -167,7 +170,7 @@ function updateAllTitle() {
 function render(animate = false) {
 	const q = normalize(state.query);
 	const filtering = isFiltering();
-	const matches = state.apps.filter(
+	const matches = visibleApps().filter(
 		(app) =>
 			(state.category === ALL || app.category === state.category) &&
 			(!q || normalize(`${pick(app.title)} ${pick(app.description)} ${categoryLabel(app.category)}`).includes(q)),
@@ -184,13 +187,14 @@ function render(animate = false) {
 	updateAllTitle();
 
 	els.empty.hidden = matches.length > 0;
+	els.empty.querySelector('button').hidden = !filtering;
 	if (matches.length === 0) {
 		els.empty.querySelector('p').textContent = state.query.trim() ? t().noResults(state.query.trim()) : t().empty;
 	}
 }
 
 function renderFilters() {
-	const keys = [ALL, ...new Set(state.apps.map((app) => app.category))];
+	const keys = [ALL, ...new Set(visibleApps().map((app) => app.category))];
 	els.filters.replaceChildren(
 		...keys.map((key) => {
 			const li = document.createElement('li');
@@ -231,7 +235,7 @@ const otherLang = () => (lang === 'vi' ? 'en' : 'vi');
 
 function updateLangButton() {
 	const next = otherLang();
-	const name = STRINGS[next].langName[next];
+	const name = STRINGS[next].langName;
 	els.langToggle.textContent = next.toUpperCase();
 	els.langToggle.lang = next;
 	els.langToggle.setAttribute('aria-label', name);
@@ -278,6 +282,7 @@ function setLang(next) {
 	applyStrings();
 	if (state.failed) showLoadError();
 	else if (state.ready) {
+		updateControls();
 		renderFilters();
 		render(false);
 	}
@@ -330,7 +335,7 @@ async function init() {
 		return;
 	}
 	state.ready = true;
-	els.controls.hidden = state.apps.length < MIN_PROJECTS_FOR_CONTROLS;
+	updateControls();
 	renderFilters();
 	render(!matchMedia('(prefers-reduced-motion: reduce)').matches);
 }

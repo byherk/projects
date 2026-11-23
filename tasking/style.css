@@ -53,6 +53,8 @@ nav.toc::-webkit-scrollbar{display:none}
 nav.toc a{white-space:nowrap;text-decoration:none;color:var(--muted);font-size:14px;font-weight:500;padding:6px 10px;border-radius:7px}
 nav.toc a:hover{color:var(--ink);background:var(--accent-soft)}
 nav.toc a.on{color:var(--accent);background:var(--accent-soft)}
+.lang-toggle{flex-shrink:0;width:40px;height:40px;padding:0;display:inline-grid;place-items:center;border:1px solid var(--line);border-radius:var(--radius);background:none;color:var(--ink);font:inherit;font-size:14px;font-weight:600;letter-spacing:.04em;cursor:pointer}
+.lang-toggle:hover{border-color:var(--accent)}
 
 .wrap{max-width:1180px;margin:0 auto;padding:0 20px}
 

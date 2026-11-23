@@ -9,7 +9,7 @@
         "en": "Turn a rough request into a clear prompt for AI. Comes with ready-to-use templates and a guide to delegating tasks."
       },
       "category": "ai",
-      "lang": ["vi"],
+      "lang": ["vi", "en"],
       "icon": "list-checks",
       "featured": true,
       "url": "tasking/"

@@ -332,24 +332,6 @@ main {
 	border-radius: var(--bh-radius);
 }
 
-/* Nhãn ngôn ngữ của dự án, nằm dưới tiêu đề thẻ. Không nổi lên trên vùng bấm phủ thẻ, để cả thẻ vẫn bấm được (Sổ tay 5.3). */
-.card-langs {
-	display: flex;
-	flex-wrap: wrap;
-	gap: var(--bh-space-2);
-}
-
-.card-lang {
-	padding: var(--bh-badge-pad);
-	border: var(--bh-border-width) solid var(--bh-color-border-strong);
-	border-radius: var(--bh-radius-badge);
-	font-size: var(--bh-text-badge);
-	font-weight: 600;
-	letter-spacing: var(--bh-tracking-label);
-	color: var(--bh-color-text-muted);
-	text-decoration: none;
-}
-
 .card-description {
 	color: var(--bh-color-text-muted);
 }
