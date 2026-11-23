@@ -10,6 +10,7 @@ Simple web tools and learning pages I've made and want to share.
 - **[Everyday Verbs](https://byherk.github.io/projects/everyday-verbs/)**: learn English verbs through short animated scenes.
 - **[Everyday Prepositions](https://byherk.github.io/projects/everyday-prepositions/)**: learn English prepositions the same way.
 - **[120 Latin & Greek Roots](https://byherk.github.io/projects/latin-greek-roots/)**: learn word roots with photos and audio.
+- **[Seeing 4D in Six Steps](https://byherk.github.io/projects/seeing-4d/)**: get a feel for four-dimensional space through slices, shadows and nets.
 
 More will come over time. Thanks for stopping by.
 

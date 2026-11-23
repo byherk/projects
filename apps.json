@@ -1,7 +1,8 @@
 {
   "categories": {
     "ai": { "vi": "Làm việc với AI", "en": "Working with AI" },
-    "english": { "vi": "Học tiếng Anh", "en": "Learning English" }
+    "english": { "vi": "Học tiếng Anh", "en": "Learning English" },
+    "science": { "vi": "Khám phá khoa học", "en": "Exploring science" }
   },
   "apps": [
     {
@@ -58,6 +59,22 @@
       "icon": "plant",
       "featured": false,
       "url": "latin-greek-roots/"
+    },
+    {
+      "id": "seeing-4d",
+      "title": {
+        "vi": "Hình dung 4D qua 6 bước",
+        "en": "Seeing 4D in Six Steps"
+      },
+      "description": {
+        "vi": "Hiểu không gian bốn chiều qua lát cắt, bóng chiếu và hình trải. Có sẵn tesseract xoay được và phòng bốn camera 4D ảo.",
+        "en": "Understand four-dimensional space through slices, shadows, and unfolded nets. Includes a tesseract you can rotate and a room of four virtual 4D cameras."
+      },
+      "category": "science",
+      "lang": ["vi", "en"],
+      "icon": "cube",
+      "featured": false,
+      "url": "seeing-4d/"
     }
   ]
 }

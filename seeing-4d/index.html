@@ -1,0 +1,466 @@
+<!doctype html>
+<!--
+Seeing 4D in Six Steps (Hình dung 4D qua 6 bước): an interactive, bilingual (VI/EN) lesson on four-dimensional space through slices, projections and nets.
+Author: HerK, 2026.
+AI assistance: made with AI tools under HerK's direction. AI-assisted content may contain errors; the page is provided as is, for reference only, without warranty.
+Copyright (c) 2026 HerK. All rights reserved. See LICENSE in the repository root.
+Fonts: none loaded; the page uses the system font stack.
+Self-contained: every figure is inline SVG or drawn on canvas by the page's own code; no external file, library or network request.
+Text: Vietnamese is written in this file; English and all text that changes at run time live in content.js.
+-->
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#091524">
+<meta name="author" content="HerK">
+<title>Hình dung 4D qua 6 bước</title>
+<meta name="description" content="Hình dung không gian bốn chiều qua lát cắt, bóng chiếu và hình trải, với tesseract xoay được và phòng bốn camera 4D ảo. Tác giả HerK.">
+<!-- Chọn ngôn ngữ trước khi vẽ trang: ?lang=vi|en, rồi lựa chọn đã lưu (khóa dùng chung với trang danh mục), rồi ngôn ngữ trình duyệt. -->
+<script>
+(function () {
+  var lang = null;
+  try {
+    var fromUrl = new URLSearchParams(location.search).get('lang');
+    if (fromUrl === 'vi' || fromUrl === 'en') lang = fromUrl;
+  } catch (e) {}
+  if (!lang) {
+    try {
+      var saved = localStorage.getItem('byherk-lang');
+      if (saved === 'vi' || saved === 'en') lang = saved;
+    } catch (e) {}
+  }
+  if (!lang) {
+    var prefs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ''];
+    lang = 'en';
+    for (var i = 0; i < prefs.length; i++) {
+      if (/^vi/i.test(prefs[i])) { lang = 'vi'; break; }
+    }
+  }
+  document.documentElement.lang = lang;
+})();
+</script>
+<link rel="canonical" href="https://byherk.github.io/projects/seeing-4d/">
+<link rel="alternate" hreflang="vi" href="https://byherk.github.io/projects/seeing-4d/">
+<link rel="alternate" hreflang="en" href="https://byherk.github.io/projects/seeing-4d/?lang=en">
+<link rel="alternate" hreflang="x-default" href="https://byherk.github.io/projects/seeing-4d/">
+<link rel="stylesheet" href="style.css">
+<script src="content.js" defer></script>
+<script src="app.js" defer></script>
+</head>
+<body>
+
+<!-- Một menu duy nhất: thanh bên ở desktop, ngăn kéo ở mobile. -->
+<aside class="lesson-sidebar" id="lessonSidebar" aria-label="Điều hướng bài học" data-i18n-aria-label="sidebarLabel">
+  <div class="sidebar-head">
+    <div class="brand"><div class="brand-icon"><span>4D</span></div><span class="sidebar-brand-text" data-i18n="brand">PHÒNG THÍ NGHIỆM TRỰC GIÁC</span></div>
+    <button type="button" class="btn sidebar-toggle" id="sidebarToggle" aria-controls="lessonSidebar" aria-expanded="true" aria-label="Thu gọn thanh bên" title="Thu gọn thanh bên"><span aria-hidden="true">‹</span></button>
+  </div>
+  <nav class="navlinks" aria-label="Mục lục sáu bước" data-i18n-aria-label="navLabel">
+    <a href="#intuition" title="01 · Trực giác" aria-label="01 · Trực giác"><span class="step-no" aria-hidden="true">01</span><span class="step-label" data-i18n="nav1">Trực giác</span></a>
+    <a href="#slices" title="02 · Lát cắt" aria-label="02 · Lát cắt"><span class="step-no" aria-hidden="true">02</span><span class="step-label" data-i18n="nav2">Lát cắt</span></a>
+    <a href="#shadows" title="03 · Bóng chiếu" aria-label="03 · Bóng chiếu"><span class="step-no" aria-hidden="true">03</span><span class="step-label" data-i18n="nav3">Bóng chiếu</span></a>
+    <a href="#cameras" title="04 · Camera 4D" aria-label="04 · Camera 4D"><span class="step-no" aria-hidden="true">04</span><span class="step-label" data-i18n="nav4">Camera 4D</span></a>
+    <a href="#nets" title="05 · Hình trải" aria-label="05 · Hình trải"><span class="step-no" aria-hidden="true">05</span><span class="step-label" data-i18n="nav5">Hình trải</span></a>
+    <a href="#summary" title="06 · Tổng kết" aria-label="06 · Tổng kết"><span class="step-no" aria-hidden="true">06</span><span class="step-label" data-i18n="nav6">Tổng kết</span></a>
+  </nav>
+</aside>
+<div class="sidebar-backdrop" id="sidebarBackdrop" aria-hidden="true"></div>
+
+<div class="page-shell">
+<header class="topbar">
+  <button type="button" class="btn menu-btn" id="menuButton" aria-controls="lessonSidebar" aria-expanded="false" aria-label="Mở mục lục sáu bước"><span aria-hidden="true">☰</span><span data-i18n="menu">Mục lục</span></button>
+  <span class="topbar-brand" data-i18n="topbarBrand">PHÒNG THÍ NGHIỆM 4D</span>
+  <button class="lang-toggle" type="button" lang="en" aria-label="English" title="English">EN</button>
+</header>
+
+<main>
+<section class="hero container" aria-labelledby="hero-title">
+  <div class="eyebrow" data-i18n="heroEyebrow">Không cần toán cao cấp</div>
+  <h1 id="hero-title" data-i18n-html="heroTitle">Bạn không cần <span>nhìn thấy 4D</span> để bắt đầu hiểu nó.</h1>
+  <p class="lede" data-i18n-html="heroLede">W là hướng thứ tư trong không gian, vuông góc với cả X, Y và Z, nên trong căn phòng 3D không có chỗ nào để chỉ tay về phía nó. Dù vậy, ta vẫn suy ra được hình dạng vật 4D theo ba cách: xem từng <b>lát cắt</b>, xem <b>bóng chiếu</b>, và mở vật ra thành <b>hình trải</b>. Một sinh vật sống trên mặt phẳng cũng có thể tìm hiểu vật 3D đúng theo ba cách ấy.</p>
+</section>
+
+<!-- Bước 01 -->
+<section class="section" id="intuition"><div class="container">
+  <div class="section-head"><div>
+    <div class="eyebrow" data-i18n="s1Eyebrow">Bước 01 · Xây trực giác</div>
+    <h2 data-i18n="s1Title">Thêm một chiều là thêm một hướng mới</h2>
+    <p data-i18n-html="s1Intro">Làm sao dựng được một hình ở chiều mà ta chưa từng thấy? Ta đi từng bậc: mỗi bậc kéo hình cũ theo một hướng <i>mới</i>, vuông góc với mọi hướng đã có. Đến bậc cuối, kéo khối lập phương theo hướng W, ta được <b>tesseract</b>, tức khối lập phương bốn chiều. Đây là một phép dựng hình học, không phải xếp nhiều khối 3D cạnh nhau trong phòng.</p>
+  </div><span class="index">0D → 1D → 2D → 3D → 4D</span></div>
+  <div class="dim-grid">
+    <div class="dim-card"><div class="dim-index">0D</div><div class="dim-icon"><svg viewBox="0 0 90 62" aria-hidden="true"><circle cx="45" cy="31" r="6" fill="#80ebdc"/></svg></div><strong data-i18n="dim0">Điểm</strong><small data-i18n="dim0Note">Chưa có hướng nào để đi.</small></div>
+    <div class="dim-card"><div class="dim-index">1D</div><div class="dim-icon"><svg viewBox="0 0 90 62" aria-hidden="true"><path d="M9 31 H81" stroke="#80ebdc" stroke-width="4" stroke-linecap="round"/><circle cx="9" cy="31" r="4" fill="white"/><circle cx="81" cy="31" r="4" fill="white"/></svg></div><strong data-i18n="dim1">Đoạn thẳng</strong><small data-i18n="dim1Note">Kéo một điểm theo một hướng.</small></div>
+    <div class="dim-card"><div class="dim-index">2D</div><div class="dim-icon"><svg viewBox="0 0 90 62" aria-hidden="true"><rect x="25" y="11" width="40" height="40" fill="#2a7f89" stroke="#80ebdc" stroke-width="3"/></svg></div><strong data-i18n="dim2">Hình vuông</strong><small data-i18n="dim2Note">Kéo đoạn thẳng theo hướng vuông góc.</small></div>
+    <div class="dim-card"><div class="dim-index">3D</div><div class="dim-icon"><svg viewBox="0 0 90 62" aria-hidden="true" fill="none" stroke="#80ebdc" stroke-width="2.5" stroke-linejoin="round"><path d="M22 24 L49 11 L75 25 L48 39 Z M22 24 V47 L48 60 V39 M75 25 V48 L48 60"/></svg></div><strong data-i18n="dim3">Khối lập phương</strong><small data-i18n="dim3Note">Nhấc hình vuông thẳng lên khỏi mặt phẳng.</small></div>
+    <div class="dim-card"><div class="dim-index">4D</div><div class="dim-icon"><svg viewBox="0 0 90 62" aria-hidden="true" fill="none" stroke-width="1.8"><rect x="12" y="3" width="65" height="55" stroke="#80ebdc"/><rect x="30" y="17" width="32" height="27" stroke="#a6abef"/><path d="M12 3 L30 17 M77 3 L62 17 M12 58 L30 44 M77 58 L62 44" stroke="#ffbd7e"/></svg></div><strong>Tesseract</strong><small data-i18n="dim4Note">Kéo khối lập phương theo hướng W.</small></div>
+  </div>
+  <div class="analogy">
+    <div class="analogy-panel"><b data-i18n="analogy2dTitle">Sinh vật 2D gặp vật 3D</b><p data-i18n="analogy2d">Nó chỉ biết những gì nằm trong mặt phẳng của mình. Khi một quả cầu đi xuyên qua mặt phẳng ấy, thứ hiện ra trong thế giới của nó là một đĩa tròn lớn dần rồi nhỏ dần.</p></div>
+    <div class="analogy-panel"><b data-i18n="analogy3dTitle">Chúng ta gặp vật 4D</b><p data-i18n-html="analogy3d">Ta cũng chỉ gặp được phần của vật 4D nằm trong không gian 3D của mình. Lưu ý: W là một hướng <b>không gian</b> thứ tư, <b>không phải</b> thời gian.</p></div>
+  </div>
+  <div class="mirror-intro">
+    <div class="eyebrow" data-i18n="mirrorEyebrow">Thí nghiệm tưởng tượng · Gương quanh quả táo</div>
+    <h3 data-i18n="mirrorTitle">Nhiều góc nhìn không tạo ra hướng mới</h3>
+    <p data-i18n-html="mirrorIntro">Đặt một quả táo ở giữa rồi xếp gương quanh nó: bạn thấy được nhiều mặt của <b>cùng một vật 3D</b>. Nhưng dù thêm một nghìn chiếc gương, không chiếc nào cho bạn nhìn theo hướng W.</p>
+    <div class="mirror-grid">
+      <div class="mirror-card">
+        <div class="mirror-card-title" data-i18n-html="mirror2dTitle">Sinh vật 2D và những chiếc gương <em>giả định</em></div>
+        <svg viewBox="0 0 390 205" role="img" aria-label="Sơ đồ nhìn từ trên xuống: một hình 2D với sáu gương giả định trong cùng mặt phẳng" data-i18n-aria-label="mirror2dAlt">
+          <g stroke="#68d8c9" stroke-width="6" stroke-linecap="round" opacity=".83">
+            <path d="M190 17h56 M190 188h56 M80 68l30-24 M324 69l-30-24 M80 145l30 24 M324 145l-30 24"/>
+          </g>
+          <g stroke="#ffbc7e" fill="#ffbc7e" fill-opacity=".15" stroke-width="2.2"><path d="M170 101L192 76L221 83L233 110L215 136L184 135Z"/></g>
+          <g stroke="#90bdd0" stroke-dasharray="4 5" opacity=".65" fill="none"><path d="M202 105L214 20 M202 105L214 185 M202 105L88 55 M202 105L314 55 M202 105L88 156 M202 105L314 156"/></g>
+          <circle cx="202" cy="105" r="3.5" fill="#fff4d7"/>
+          <text x="202" y="159" text-anchor="middle" font-size="13" fill="#c2e2eb" data-i18n="mirror2dObject">Vật 2D</text>
+          <text x="202" y="200" text-anchor="middle" font-size="12" fill="#b1c8d7" data-i18n-html="mirror2dCaption">Chỉ đổi hướng <tspan font-weight="700" fill="#79e5d5">trong mặt phẳng</tspan></text>
+        </svg>
+        <p data-i18n="mirror2dNote">Gương giúp sinh vật ấy nhìn quanh khắp mặt phẳng, nhưng nó vẫn không có hướng “lên khỏi mặt phẳng” để thấy 3D.</p>
+      </div>
+      <div class="mirror-card">
+        <div class="mirror-card-title" data-i18n="mirror3dTitle">Chúng ta và gương thật quanh quả táo</div>
+        <svg viewBox="0 0 390 205" role="img" aria-label="Quả táo ở giữa, sáu gương xung quanh theo các hướng trong không gian 3D" data-i18n-aria-label="mirror3dAlt">
+          <g fill="none" stroke="#68d8c9" stroke-width="5" opacity=".84"><path d="M178 17h65 M178 188h65 M72 61l41-26 M318 61l-41-26 M72 152l41 26 M318 152l-41 26"/></g>
+          <g stroke="#90bdd0" stroke-dasharray="4 6" opacity=".65"><path d="M195 98L210 19 M195 98L210 188 M195 98L90 48 M195 98L297 48 M195 98L89 166 M195 98L297 166"/></g>
+          <path d="M193 73c-19-15-42 3-35 27 5 23 19 44 36 39 15 5 33-16 37-40 4-24-17-41-38-26Z" fill="#f08b64" stroke="#ffd1aa" stroke-width="2.5"/>
+          <path d="M195 77q-1-20 11-26" fill="none" stroke="#b5e7bb" stroke-width="3"/>
+          <path d="M197 59q20-19 31-6-13 15-31 6Z" fill="#79d2ae"/>
+          <ellipse cx="177" cy="96" rx="8" ry="16" transform="rotate(-22 177 96)" fill="#ffe2c0" opacity=".32"/>
+          <text x="195" y="200" text-anchor="middle" font-size="12" fill="#b1c8d7" data-i18n-html="mirror3dCaption">Nhiều hướng nhìn <tspan font-weight="700" fill="#79e5d5">vẫn trong 3D</tspan></text>
+        </svg>
+        <p data-i18n="mirror3dNote">Gương cho thấy thêm mặt sau hay những góc khuất của quả táo, nhưng mọi tia sáng và mọi hướng nhìn vẫn nằm trong không gian 3D.</p>
+      </div>
+    </div>
+    <p class="mirror-outro" data-i18n-html="mirrorOutro">Hai sơ đồ chỉ minh họa ý về góc nhìn, <b>không</b> phải cách làm gương 2D. Vậy làm sao tìm hiểu một hướng mà ta không nhìn theo được? Công cụ đầu tiên: xem từng <b>lát cắt</b>.</p>
+  </div>
+</div></section>
+
+<!-- Bước 02 -->
+<section class="section" id="slices"><div class="container">
+  <div class="section-head"><div>
+    <div class="eyebrow" data-i18n="s2Eyebrow">Bước 02 · Nhìn từng lát cắt</div>
+    <h2 data-i18n="s2Title">Đi xuyên qua: không thấy → nhỏ → lớn → nhỏ → biến mất</h2>
+    <p data-i18n-html="s2Intro">Chuyện gì xảy ra khi một vật đi xuyên qua thế giới của bạn? <b>Lát cắt</b> là phần chung giữa vật và thế giới ấy. Có thể xem vật 3D như một chồng lát 2D xếp dọc theo Z, và vật 4D như một chồng lát 3D xếp dọc theo W. Bên trái: <b>khối cầu đặc 3D</b> bị một mặt phẳng 2D cắt qua. Bên phải: <b>khối cầu đặc 4D</b> bị không gian 3D cắt qua.</p>
+  </div><span class="index" data-i18n="s2Index">So sánh song song</span></div>
+  <div class="slice-control">
+    <div class="top">
+      <p data-i18n="sliceHint">Dời mặt cắt từ phía trước tâm ra phía sau tâm</p>
+      <div class="btnrow"><span id="sliceStatus" class="status" role="status" aria-live="polite">Đang cắt qua vật</span><button type="button" class="btn primary" id="slicePlay" aria-pressed="false">▶&#xFE0E; Chạy mô phỏng</button><button type="button" class="btn" id="sliceCenter" data-i18n="sliceCenter">Về tâm</button></div>
+    </div>
+    <label class="label-inline" for="sliceRange"><span data-i18n="sliceLabel">Vị trí lát cắt:</span> <output id="sliceOffset">−0,45</output></label>
+    <input type="range" min="-115" max="115" step="1" value="-45" id="sliceRange" aria-label="Vị trí mặt cắt chung cho hai mô hình" data-i18n-aria-label="sliceRangeLabel">
+    <div class="slice-scale"><span data-i18n="scaleOutMinus">−1,15 · ngoài vật</span><span data-i18n="scaleCenter">0 · qua tâm</span><span data-i18n="scaleOutPlus">+1,15 · ngoài vật</span></div>
+  </div>
+  <div class="slice-grid">
+    <div class="slice-pane"><h3 data-i18n="slice2dTitle">Thế giới phẳng 2D</h3><p class="sub" data-i18n-html="slice2dSub">Sinh vật 2D gặp một <b>đĩa tròn đặc</b>: lát cắt của quả cầu đặc 3D.</p><canvas id="slice2dCanvas" aria-label="Đĩa tròn 2D đổi bán kính theo vị trí lát cắt" data-i18n-aria-label="slice2dAlt"></canvas><p class="side-meta" id="slice2dText"></p></div>
+    <div class="slice-pane"><h3 data-i18n="slice3dTitle">Không gian 3D của chúng ta</h3><p class="sub" data-i18n-html="slice3dSub">Ta gặp một <b>khối cầu đặc 3D</b>: lát cắt của khối cầu đặc 4D.</p><canvas id="slice3dCanvas" aria-label="Khối cầu 3D đổi bán kính theo lát cắt của khối cầu 4D" data-i18n-aria-label="slice3dAlt"></canvas><p class="side-meta" id="slice3dText"></p></div>
+  </div>
+  <figure class="figure"><div class="figure-art"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 470" role="img" aria-label="Năm thời điểm của lát cắt: đĩa tròn 2D và khối cầu 3D cùng lớn dần rồi nhỏ dần" data-i18n-aria-label="fig1Alt">
+<defs><radialGradient id="orb" cx="30%" cy="24%" r="75%"><stop stop-color="#d8fff9"/><stop offset=".27" stop-color="#70e6d5"/><stop offset=".65" stop-color="#2d90b1"/><stop offset="1" stop-color="#173c67"/></radialGradient><linearGradient id="tile" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#15243a"/><stop offset="1" stop-color="#0d1a2b"/></linearGradient></defs>
+<rect width="1200" height="470" rx="24" fill="#0b1728"/>
+<text x="36" y="42" fill="#95a9c4" font-family="Arial,sans-serif" font-size="17" letter-spacing="2" data-i18n="fig1Heading">NĂM THỜI ĐIỂM KHI VẬT ĐI XUYÊN QUA</text>
+<text x="30" y="138" fill="#9dc6dc" font-family="Arial,sans-serif" font-size="18">3D → 2D</text>
+<text x="30" y="317" fill="#9dc6dc" font-family="Arial,sans-serif" font-size="18">4D → 3D</text>
+<line x1="144" y1="243" x2="1167" y2="243" stroke="#31465e" stroke-width="1"/>
+<rect x="147" y="66" width="190" height="155" rx="18" fill="url(#tile)"/>
+<rect x="147" y="255" width="190" height="163" rx="18" fill="url(#tile)"/>
+<text x="242" y="443" fill="#c9d9ea" font-family="Arial,sans-serif" font-size="16" text-anchor="middle" data-i18n="fig1Touch">Vừa chạm</text>
+<circle cx="242" cy="151" r="4" fill="#79e9d8"/>
+<circle cx="242" cy="336" r="4" fill="#79e9d8"/>
+<rect x="363" y="66" width="190" height="155" rx="18" fill="url(#tile)"/>
+<rect x="363" y="255" width="190" height="163" rx="18" fill="url(#tile)"/>
+<text x="458" y="443" fill="#c9d9ea" font-family="Arial,sans-serif" font-size="16" text-anchor="middle" data-i18n="fig1Grow">Lớn dần</text>
+<circle cx="458" cy="151" r="47.88" fill="#79e9d8" fill-opacity=".84" stroke="#bafdf2" stroke-width="2"/>
+<circle cx="458" cy="336" r="47.88" fill="url(#orb)" stroke="#bafdf2" stroke-width="1.8"/>
+<ellipse cx="458" cy="336" rx="47.88" ry="12.93" fill="none" stroke="#d9fff8" stroke-opacity=".47" stroke-width="1.2"/>
+<rect x="579" y="66" width="190" height="155" rx="18" fill="url(#tile)"/>
+<rect x="579" y="255" width="190" height="163" rx="18" fill="url(#tile)"/>
+<text x="674" y="443" fill="#c9d9ea" font-family="Arial,sans-serif" font-size="16" text-anchor="middle" data-i18n="fig1Max">Lớn nhất</text>
+<circle cx="674" cy="151" r="69.00" fill="#79e9d8" fill-opacity=".84" stroke="#bafdf2" stroke-width="2"/>
+<circle cx="674" cy="336" r="69.00" fill="url(#orb)" stroke="#bafdf2" stroke-width="1.8"/>
+<ellipse cx="674" cy="336" rx="69.00" ry="18.63" fill="none" stroke="#d9fff8" stroke-opacity=".47" stroke-width="1.2"/>
+<rect x="795" y="66" width="190" height="155" rx="18" fill="url(#tile)"/>
+<rect x="795" y="255" width="190" height="163" rx="18" fill="url(#tile)"/>
+<text x="890" y="443" fill="#c9d9ea" font-family="Arial,sans-serif" font-size="16" text-anchor="middle" data-i18n="fig1Shrink">Nhỏ dần</text>
+<circle cx="890" cy="151" r="47.88" fill="#79e9d8" fill-opacity=".84" stroke="#bafdf2" stroke-width="2"/>
+<circle cx="890" cy="336" r="47.88" fill="url(#orb)" stroke="#bafdf2" stroke-width="1.8"/>
+<ellipse cx="890" cy="336" rx="47.88" ry="12.93" fill="none" stroke="#d9fff8" stroke-opacity=".47" stroke-width="1.2"/>
+<rect x="1011" y="66" width="190" height="155" rx="18" fill="url(#tile)"/>
+<rect x="1011" y="255" width="190" height="163" rx="18" fill="url(#tile)"/>
+<text x="1106" y="443" fill="#c9d9ea" font-family="Arial,sans-serif" font-size="16" text-anchor="middle" data-i18n="fig1Leave">Vừa rời</text>
+<circle cx="1106" cy="151" r="4" fill="#79e9d8"/>
+<circle cx="1106" cy="336" r="4" fill="#79e9d8"/>
+<text x="37" y="467" fill="#7f96b2" font-family="Arial,sans-serif" font-size="12" data-i18n="fig1Note">Kích thước tương đối đúng tỉ lệ; khối đặc thể hiện qua bề mặt nhìn thấy.</text>
+</svg></div><figcaption data-i18n-html="fig1Caption"><strong>Hình 1 — Lát cắt.</strong> Hàng trên là đĩa tròn 2D; hàng dưới là khối cầu 3D vẽ trên màn hình phẳng. Bán kính của cả hai đổi theo cùng một quy luật: với vật có bán kính 1, lát cắt cách tâm một khoảng d có bán kính √(1 − d²). Hình chỉ vẽ phần giao với thế giới quan sát, <i>không</i> vẽ trọn vật 4D.</figcaption></figure>
+  <div class="note"><strong data-i18n="solidNoteTitle">Điểm dễ nhầm:</strong><p data-i18n-html="solidNote">“Khối cầu đặc” gồm cả phần ruột bên trong. Lát cắt của <i>khối</i> cầu 4D là một <i>khối</i> cầu 3D. Còn nếu chỉ lấy <i>bề mặt</i> của vật 4D, lát cắt chỉ là <i>bề mặt</i> của một quả cầu 3D, rỗng ruột. Đừng lẫn hai thứ này.</p></div>
+
+  <div class="recon-lesson">
+    <div class="label-inline" data-i18n="reconEyebrow">Từ quan sát đến tái dựng</div>
+    <h3 data-i18n="reconTitle">Ghép các lát cắt để dựng lại vật 4D</h3>
+    <p class="recon-lede" data-i18n-html="reconLede">Mỗi vị trí W cho một lát cắt 3D khác nhau của cùng một vật. Nếu ghi lại <b>đầy đủ từng lát cắt 3D</b>, biết đúng tọa độ W của mỗi lát rồi xếp chúng theo thứ tự, ta dựng lại được hình dạng và cả cấu trúc bên trong của vật dưới dạng mô hình toán học 4D, mà không cần nhìn thấy trọn vật cùng lúc. Đó cũng là cách ghép các lát 2D theo Z để tìm hiểu một vật 3D.</p>
+    <div class="recon-table-wrap">
+      <table class="recon-table">
+        <thead><tr><th scope="col" data-i18n="tableHead1">Cần ghi lại</th><th scope="col" data-i18n="tableHead2">Sinh vật 2D tìm hiểu vật 3D</th><th scope="col" data-i18n="tableHead3">Con người 3D tìm hiểu vật 4D</th></tr></thead>
+        <tbody>
+          <tr><td data-i18n="tableRow1">Nội dung từng lát</td><td data-i18n-html="tableRow1a">Hình dạng <b>đầy đủ của lát 2D</b></td><td data-i18n-html="tableRow1b">Hình dạng <b>đầy đủ của lát 3D</b></td></tr>
+          <tr><td data-i18n="tableRow2">Vị trí từng lát</td><td data-i18n="tableRow2a">Tọa độ theo hướng thứ ba: Z</td><td data-i18n="tableRow2b">Tọa độ theo hướng thứ tư: W</td></tr>
+          <tr><td data-i18n="tableRow3">Kết quả khi ghép</td><td data-i18n="tableRow3a">Mô hình hình học 3D</td><td data-i18n="tableRow3b">Mô hình hình học 4D</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="recon-conditions" role="group" aria-label="Ba điều kiện để dựng lại" data-i18n-aria-label="conditionsLabel">
+      <div class="recon-condition"><strong data-i18n="cond1Title">01 · Lát cắt 3D đầy đủ</strong><p data-i18n="cond1">Phải biết toàn bộ phần giao 3D, không chỉ một tấm ảnh 2D chụp từ một phía.</p></div>
+      <div class="recon-condition"><strong data-i18n="cond2Title">02 · Biết tọa độ W</strong><p data-i18n="cond2">Phải biết mỗi lát nằm ở đâu và cách nhau bao xa theo W. Chỉ biết mỗi lát chụp lúc nào thì chưa đủ.</p></div>
+      <div class="recon-condition"><strong data-i18n="cond3Title">03 · Vật đứng yên</strong><p data-i18n="cond3">Vật không đổi hình trong lúc quét, hoặc ta đo được mọi thay đổi để tính vào.</p></div>
+    </div>
+    <h4 data-i18n="archTitle">Thử với một vật 4D có hai phần tưởng như rời nhau</h4>
+    <p class="recon-lede" data-i18n-html="archLede">Không phải vật 4D nào cũng có lát cắt đơn giản như khối cầu. Mô hình dưới đây là <b>một vật 4D liền một khối, uốn hình vòm trong mặt phẳng X–W</b>. Ở W = −0,45, lát cắt cho thấy hai phần 3D tách rời. Từ khoảng W = +0,35 trở lên, hai phần nối thành một.</p>
+    <div class="slice-control recon-control">
+      <div class="top"><p data-i18n-html="archHint"><b>Vị trí lát cắt W</b> · đi dọc hướng không gian thứ tư, không xoay vật</p><div class="recon-status"><output id="reconWOutput" for="reconWRange">−0,45</output><span class="recon-state" id="reconStatus" role="status" aria-live="polite">2 phần tách rời</span></div></div>
+      <label class="label-inline" for="reconWRange" data-i18n="archLabel">Lát cắt 3D tại W</label>
+      <input type="range" id="reconWRange" min="-115" max="115" step="1" value="-45" aria-label="Vị trí W của lát cắt qua vật 4D hình vòm" data-i18n-aria-label="archRangeLabel">
+      <div class="slice-scale"><span data-i18n="scaleOutMinus">−1,15 · ngoài vật</span><span data-i18n="scaleTwo">−0,45 · hai phần</span><span data-i18n="scaleOne">+0,55 · liền một khối</span><span data-i18n="scaleOutPlus">+1,15 · ngoài vật</span></div>
+    </div>
+    <div class="recon-grid">
+      <div class="slice-pane"><h3 data-i18n="planTitle">Sơ đồ X–W</h3><p class="sub" data-i18n-html="planSub">Đây chỉ là <b>lát cắt 2D tại Y = Z = 0</b> của vật 4D, giúp thấy chỗ hai nhánh nối nhau ở một vị trí W khác.</p><canvas id="reconPlanCanvas" role="img" aria-label="Sơ đồ X–W của vật 4D hình vòm, có đường đánh dấu vị trí lát cắt hiện tại" data-i18n-aria-label="planAlt"></canvas><p class="side-meta" id="reconPlanText"></p></div>
+      <div class="slice-pane"><h3 data-i18n="bodyTitle">Lát cắt trong thế giới 3D</h3><p class="sub" data-i18n-html="bodySub">Khối bạn thấy là <b>phần giao 3D</b> tại W đang chọn, vẽ lên màn hình 2D.</p><canvas id="reconBodyCanvas" role="img" aria-label="Hình 3D của lát cắt vật 4D: có thể là hai phần rời hoặc một phần liền" data-i18n-aria-label="bodyAlt"></canvas><p class="side-meta" id="reconBodyText"></p></div>
+    </div>
+    <p class="recon-detail" data-i18n-html="archDetail"><b>Giới hạn của mô hình:</b> vật 4D này là hợp của 129 khối cầu đặc 4D nhỏ, có tâm nằm dọc một đường vòng cung trong mặt phẳng X–W. Lát cắt 3D bên phải là hợp của các khối cầu 3D tương ứng; hình vẽ chỉ thể hiện bề mặt nhìn thấy. Đây là một vật thể toán học để minh họa, không phải cơ thể của sinh vật 4D nào.</p>
+    <p class="recon-foot" data-i18n-html="archFoot">Hai phần rời trong một lát cắt 3D vẫn có thể thuộc cùng một vật 4D; các lát ở những vị trí W khác cho thấy chỗ chúng nối nhau. Nhưng mỗi lần, lát cắt chỉ cho thấy một phần giao. Ở Bước 03, ta xem <strong>bóng chiếu của cả bộ khung</strong>.</p>
+    <p class="recon-question" data-i18n="archQuestion">Câu hỏi gợi mở: nếu đi lại được theo hướng W, một sinh vật 4D sẽ thấy gì bên trong một chiếc hộp 3D đóng kín?</p>
+  </div>
+</div></section>
+
+<!-- Bước 03 -->
+<section class="section" id="shadows"><div class="container">
+  <div class="section-head"><div>
+    <div class="eyebrow" data-i18n="s3Eyebrow">Bước 03 · Bóng chiếu và phép xoay 4D</div>
+    <h2 data-i18n="s3Title">Tesseract: 16 đỉnh, 32 cạnh, 24 mặt vuông, 8 ô lập phương</h2>
+    <p data-i18n-html="s3Intro">Lát cắt chỉ cho thấy từng phần giao. Muốn giữ hình ảnh của <b>cả bộ khung</b> cùng lúc, ta dùng <b>phép chiếu</b>: nén vật xuống thấp hơn một chiều, như đèn rọi vào vật tạo ra bóng. Thứ bạn thấy dưới đây là <b>hình vẽ 2D của phép chiếu 4D → 3D → 2D</b>, không phải chính vật 4D.</p>
+  </div><span class="index" data-i18n="s3Index">Tương tác trực tiếp</span></div>
+  <div class="lab">
+    <div class="canvas-panel">
+      <div class="canvas-meta"><span class="label-inline" data-i18n="tesseractLabel">Khung dây 4D đang xoay</span><span class="canvas-badge" data-i18n="tesseractBadge">Kéo hình: đổi góc nhìn 3D</span></div>
+      <canvas id="tesseractCanvas" class="tesseract-canvas" tabindex="0" aria-label="Hình chiếu tesseract; kéo hoặc dùng phím mũi tên để đổi góc nhìn 3D" data-i18n-aria-label="tesseractAlt"></canvas>
+      <div class="legend"><span><i class="swatch"></i> <span data-i18n="legendXYZ">Cạnh theo X, Y, Z</span></span><span><i class="swatch w"></i> <span data-i18n="legendW">Cạnh theo hướng W</span></span></div>
+    </div>
+    <div class="controls">
+      <h3 data-i18n="planesTitle">6 mặt phẳng xoay</h3>
+      <p data-i18n-html="planesIntro">Mỗi thanh xoay vật <i>trong</i> một mặt phẳng, trộn hai trục với nhau. Ba mặt phẳng có chữ <b class="w-text">W</b> là kiểu xoay mà vật 3D thông thường không làm được.</p>
+      <div class="slider-block"><div class="slider-line"><label for="angleXY">XY</label><output id="outXY" for="angleXY">12°</output></div><input class="rotation-input" id="angleXY" data-plane="XY" type="range" min="-180" max="180" step="1" value="12" aria-label="Góc xoay trong mặt phẳng XY" data-i18n-aria-label="angleXY"></div>
+      <div class="slider-block"><div class="slider-line"><label for="angleXZ">XZ</label><output id="outXZ" for="angleXZ">−14°</output></div><input class="rotation-input" id="angleXZ" data-plane="XZ" type="range" min="-180" max="180" step="1" value="-14" aria-label="Góc xoay trong mặt phẳng XZ" data-i18n-aria-label="angleXZ"></div>
+      <div class="slider-block"><div class="slider-line"><label for="angleYZ">YZ</label><output id="outYZ" for="angleYZ">18°</output></div><input class="rotation-input" id="angleYZ" data-plane="YZ" type="range" min="-180" max="180" step="1" value="18" aria-label="Góc xoay trong mặt phẳng YZ" data-i18n-aria-label="angleYZ"></div>
+      <div class="slider-block accent-w"><div class="slider-line"><label for="angleXW" data-i18n="labelXW">XW · ra khỏi 3D</label><output id="outXW" for="angleXW">35°</output></div><input class="rotation-input" id="angleXW" data-plane="XW" type="range" min="-180" max="180" step="1" value="35" aria-label="Góc xoay trong mặt phẳng XW" data-i18n-aria-label="angleXW"></div>
+      <div class="slider-block accent-w"><div class="slider-line"><label for="angleYW" data-i18n="labelYW">YW · ra khỏi 3D</label><output id="outYW" for="angleYW">25°</output></div><input class="rotation-input" id="angleYW" data-plane="YW" type="range" min="-180" max="180" step="1" value="25" aria-label="Góc xoay trong mặt phẳng YW" data-i18n-aria-label="angleYW"></div>
+      <div class="slider-block accent-w"><div class="slider-line"><label for="angleZW" data-i18n="labelZW">ZW · ra khỏi 3D</label><output id="outZW" for="angleZW">−12°</output></div><input class="rotation-input" id="angleZW" data-plane="ZW" type="range" min="-180" max="180" step="1" value="-12" aria-label="Góc xoay trong mặt phẳng ZW" data-i18n-aria-label="angleZW"></div>
+      <div class="btnrow"><button class="btn primary" type="button" id="rotatePlay" aria-pressed="false">▶&#xFE0E; Xoay tự động</button><button class="btn" type="button" id="rotateReset" data-i18n="rotateReset">↺ Đặt lại</button><button class="btn" type="button" id="rotateZero" data-i18n="rotateZero">0° tất cả</button></div>
+      <div class="hint" data-i18n-html="rotateHint">Mẹo: bấm <b>0° tất cả</b> rồi chỉ kéo XW. Hình biến dạng vì phép xoay XW trộn hướng W vào X, rồi phép chiếu dồn W vào ba chiều ta thấy.</div>
+    </div>
+  </div>
+  <div class="note"><strong data-i18n="readTitle">Đọc hình thế nào?</strong><p data-i18n-html="readNote">Mỗi đỉnh có bốn tọa độ X, Y, Z, W, mỗi tọa độ bằng +1 hoặc −1, nên có 2⁴ = 16 đỉnh. Cạnh màu cam nối hai đỉnh chỉ khác nhau ở W. Phép xoay XW, YW, ZW trộn hướng W với ba hướng quen thuộc: đó là phép biến đổi 4D thật sự trên vật, không phải xoay camera. Còn khi bạn kéo trên hình, chỉ camera 3D xoay, sau phép chiếu.</p></div>
+  <div class="figure-block">
+    <div class="figure-head"><h3 data-i18n="fig2Title">Đối chiếu: khối lập phương chiếu xuống 2D, tesseract chiếu xuống 3D</h3><span data-i18n="fig2Tag">HÌNH 2 · BÓNG CHIẾU</span></div>
+    <figure class="figure"><div class="figure-art"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 540" role="img" aria-label="Hình chiếu khung dây: khối lập phương từ 3D xuống 2D, tesseract từ 4D xuống 3D" data-i18n-aria-label="fig2Alt">
+<rect width="1200" height="540" rx="24" fill="#0b1728"/>
+<rect x="26" y="26" width="562" height="488" rx="20" fill="#102038" stroke="#2a4560"/>
+<rect x="612" y="26" width="562" height="488" rx="20" fill="#102038" stroke="#2a4560"/>
+<text x="57" y="70" font-family="Arial,sans-serif" font-size="24" font-weight="700" fill="#dfefff" data-i18n="fig2Cube">Khối lập phương</text>
+<text x="643" y="70" font-family="Arial,sans-serif" font-size="24" font-weight="700" fill="#dfefff">Tesseract</text>
+<text x="57" y="104" font-family="Arial,sans-serif" font-size="16" fill="#8dcaba" data-i18n="fig2CubeSub">3D → hình chiếu 2D</text>
+<text x="643" y="104" font-family="Arial,sans-serif" font-size="16" fill="#8dcaba" data-i18n="fig2TessSub">4D → hình chiếu 3D → màn hình 2D</text>
+<path d="M65 128 V430" stroke="#4b6681" stroke-opacity=".13"/>
+<path d="M101 128 V430" stroke="#4b6681" stroke-opacity=".13"/>
+<path d="M137 128 V430" stroke="#4b6681" stroke-opacity=".13"/>
+<path d="M173 128 V430" stroke="#4b6681" stroke-opacity=".13"/>
+<path d="M209 128 V430" stroke="#4b6681" stroke-opacity=".13"/>
+<path d="M245 128 V430" stroke="#4b6681" stroke-opacity=".13"/>
+<path d="M281 128 V430" stroke="#4b6681" stroke-opacity=".13"/>
+<path d="M317 128 V430" stroke="#4b6681" stroke-opacity=".13"/>
+<path d="M353 128 V430" stroke="#4b6681" stroke-opacity=".13"/>
+<path d="M389 128 V430" stroke="#4b6681" stroke-opacity=".13"/>
+<path d="M425 128 V430" stroke="#4b6681" stroke-opacity=".13"/>
+<path d="M461 128 V430" stroke="#4b6681" stroke-opacity=".13"/>
+<path d="M497 128 V430" stroke="#4b6681" stroke-opacity=".13"/>
+<path d="M533 128 V430" stroke="#4b6681" stroke-opacity=".13"/>
+<path d="M54 133 H562" stroke="#4b6681" stroke-opacity=".13"/>
+<path d="M54 169 H562" stroke="#4b6681" stroke-opacity=".13"/>
+<path d="M54 205 H562" stroke="#4b6681" stroke-opacity=".13"/>
+<path d="M54 241 H562" stroke="#4b6681" stroke-opacity=".13"/>
+<path d="M54 277 H562" stroke="#4b6681" stroke-opacity=".13"/>
+<path d="M54 313 H562" stroke="#4b6681" stroke-opacity=".13"/>
+<path d="M54 349 H562" stroke="#4b6681" stroke-opacity=".13"/>
+<path d="M54 385 H562" stroke="#4b6681" stroke-opacity=".13"/>
+<path d="M54 421 H562" stroke="#4b6681" stroke-opacity=".13"/>
+<line x1="291.58" y1="313.60" x2="460.50" y2="385.70" stroke="#74e5d3" stroke-width="4" stroke-linecap="round"/>
+<line x1="291.58" y1="313.60" x2="151.50" y2="391.88" stroke="#74e5d3" stroke-width="4" stroke-linecap="round"/>
+<line x1="291.58" y1="313.60" x2="291.58" y2="122.02" stroke="#74e5d3" stroke-width="4" stroke-linecap="round"/>
+<line x1="460.50" y1="385.70" x2="320.42" y2="463.98" stroke="#74e5d3" stroke-width="4" stroke-linecap="round"/>
+<line x1="460.50" y1="385.70" x2="460.50" y2="194.12" stroke="#74e5d3" stroke-width="4" stroke-linecap="round"/>
+<line x1="151.50" y1="391.88" x2="320.42" y2="463.98" stroke="#74e5d3" stroke-width="4" stroke-linecap="round"/>
+<line x1="151.50" y1="391.88" x2="151.50" y2="200.30" stroke="#74e5d3" stroke-width="4" stroke-linecap="round"/>
+<line x1="320.42" y1="463.98" x2="320.42" y2="272.40" stroke="#74e5d3" stroke-width="4" stroke-linecap="round"/>
+<line x1="291.58" y1="122.02" x2="460.50" y2="194.12" stroke="#74e5d3" stroke-width="4" stroke-linecap="round"/>
+<line x1="291.58" y1="122.02" x2="151.50" y2="200.30" stroke="#74e5d3" stroke-width="4" stroke-linecap="round"/>
+<line x1="460.50" y1="194.12" x2="320.42" y2="272.40" stroke="#74e5d3" stroke-width="4" stroke-linecap="round"/>
+<line x1="151.50" y1="200.30" x2="320.42" y2="272.40" stroke="#74e5d3" stroke-width="4" stroke-linecap="round"/>
+<circle cx="291.58" cy="313.60" r="4.3" fill="#d8fff9"/>
+<circle cx="460.50" cy="385.70" r="4.3" fill="#d8fff9"/>
+<circle cx="151.50" cy="391.88" r="4.3" fill="#d8fff9"/>
+<circle cx="320.42" cy="463.98" r="4.3" fill="#d8fff9"/>
+<circle cx="291.58" cy="122.02" r="4.3" fill="#d8fff9"/>
+<circle cx="460.50" cy="194.12" r="4.3" fill="#d8fff9"/>
+<circle cx="151.50" cy="200.30" r="4.3" fill="#d8fff9"/>
+<circle cx="320.42" cy="272.40" r="4.3" fill="#d8fff9"/>
+<line x1="881.56" y1="316.20" x2="1039.00" y2="383.40" stroke="#74e5d3" stroke-width="3.3" stroke-linecap="round"/>
+<line x1="888.56" y1="306.20" x2="964.00" y2="338.40" stroke="#7183c8" stroke-width="2.6" stroke-linecap="round"/>
+<line x1="881.56" y1="316.20" x2="751.00" y2="389.16" stroke="#74e5d3" stroke-width="3.3" stroke-linecap="round"/>
+<line x1="888.56" y1="306.20" x2="826.00" y2="341.16" stroke="#7183c8" stroke-width="2.6" stroke-linecap="round"/>
+<line x1="881.56" y1="316.20" x2="881.56" y2="137.64" stroke="#74e5d3" stroke-width="3.3" stroke-linecap="round"/>
+<line x1="888.56" y1="306.20" x2="888.56" y2="220.64" stroke="#7183c8" stroke-width="2.6" stroke-linecap="round"/>
+<line x1="1039.00" y1="383.40" x2="908.44" y2="456.36" stroke="#74e5d3" stroke-width="3.3" stroke-linecap="round"/>
+<line x1="964.00" y1="338.40" x2="901.44" y2="373.36" stroke="#7183c8" stroke-width="2.6" stroke-linecap="round"/>
+<line x1="1039.00" y1="383.40" x2="1039.00" y2="204.84" stroke="#74e5d3" stroke-width="3.3" stroke-linecap="round"/>
+<line x1="964.00" y1="338.40" x2="964.00" y2="252.84" stroke="#7183c8" stroke-width="2.6" stroke-linecap="round"/>
+<line x1="751.00" y1="389.16" x2="908.44" y2="456.36" stroke="#74e5d3" stroke-width="3.3" stroke-linecap="round"/>
+<line x1="826.00" y1="341.16" x2="901.44" y2="373.36" stroke="#7183c8" stroke-width="2.6" stroke-linecap="round"/>
+<line x1="751.00" y1="389.16" x2="751.00" y2="210.60" stroke="#74e5d3" stroke-width="3.3" stroke-linecap="round"/>
+<line x1="826.00" y1="341.16" x2="826.00" y2="255.60" stroke="#7183c8" stroke-width="2.6" stroke-linecap="round"/>
+<line x1="908.44" y1="456.36" x2="908.44" y2="277.80" stroke="#74e5d3" stroke-width="3.3" stroke-linecap="round"/>
+<line x1="901.44" y1="373.36" x2="901.44" y2="287.80" stroke="#7183c8" stroke-width="2.6" stroke-linecap="round"/>
+<line x1="881.56" y1="137.64" x2="1039.00" y2="204.84" stroke="#74e5d3" stroke-width="3.3" stroke-linecap="round"/>
+<line x1="888.56" y1="220.64" x2="964.00" y2="252.84" stroke="#7183c8" stroke-width="2.6" stroke-linecap="round"/>
+<line x1="881.56" y1="137.64" x2="751.00" y2="210.60" stroke="#74e5d3" stroke-width="3.3" stroke-linecap="round"/>
+<line x1="888.56" y1="220.64" x2="826.00" y2="255.60" stroke="#7183c8" stroke-width="2.6" stroke-linecap="round"/>
+<line x1="1039.00" y1="204.84" x2="908.44" y2="277.80" stroke="#74e5d3" stroke-width="3.3" stroke-linecap="round"/>
+<line x1="964.00" y1="252.84" x2="901.44" y2="287.80" stroke="#7183c8" stroke-width="2.6" stroke-linecap="round"/>
+<line x1="751.00" y1="210.60" x2="908.44" y2="277.80" stroke="#74e5d3" stroke-width="3.3" stroke-linecap="round"/>
+<line x1="826.00" y1="255.60" x2="901.44" y2="287.80" stroke="#7183c8" stroke-width="2.6" stroke-linecap="round"/>
+<line x1="881.56" y1="316.20" x2="888.56" y2="306.20" stroke="#ffbd7e" stroke-width="2.6" stroke-linecap="round"/>
+<line x1="1039.00" y1="383.40" x2="964.00" y2="338.40" stroke="#ffbd7e" stroke-width="2.6" stroke-linecap="round"/>
+<line x1="751.00" y1="389.16" x2="826.00" y2="341.16" stroke="#ffbd7e" stroke-width="2.6" stroke-linecap="round"/>
+<line x1="908.44" y1="456.36" x2="901.44" y2="373.36" stroke="#ffbd7e" stroke-width="2.6" stroke-linecap="round"/>
+<line x1="881.56" y1="137.64" x2="888.56" y2="220.64" stroke="#ffbd7e" stroke-width="2.6" stroke-linecap="round"/>
+<line x1="1039.00" y1="204.84" x2="964.00" y2="252.84" stroke="#ffbd7e" stroke-width="2.6" stroke-linecap="round"/>
+<line x1="751.00" y1="210.60" x2="826.00" y2="255.60" stroke="#ffbd7e" stroke-width="2.6" stroke-linecap="round"/>
+<line x1="908.44" y1="277.80" x2="901.44" y2="287.80" stroke="#ffbd7e" stroke-width="2.6" stroke-linecap="round"/>
+<text x="56" y="475" font-family="Arial,sans-serif" font-size="15" fill="#a5bcd3" data-i18n="fig2CubeNote">12 cạnh chiếu lên mặt phẳng</text>
+<text x="642" y="475" font-family="Arial,sans-serif" font-size="15" fill="#a5bcd3" data-i18n="fig2TessNote">32 cạnh: 24 cạnh của hai khung + 8 cạnh nối W</text>
+</svg></div><figcaption data-i18n-html="fig2Caption"><strong>Hình 2 — Bóng chiếu dạng khung dây.</strong> Khối lập phương 3D cho hình chiếu 2D; tesseract 4D cho hình chiếu 3D, rồi ta chiếu thêm một lần nữa để vẽ lên màn hình 2D. Đường màu cam nối các đỉnh tương ứng của hai lớp khung theo hướng W. Đây là hình chiếu của <em>các cạnh</em>, như thể vật trong suốt, <b>không</b> phải bóng đen của một khối đặc. Đổi hướng chiếu thì dáng hình cũng đổi.</figcaption></figure>
+  </div>
+</div></section>
+
+<!-- Bước 04 -->
+<section class="section" id="cameras"><div class="container">
+  <div class="section-head"><div>
+    <div class="eyebrow" data-i18n="s4Eyebrow">Bước 04 · Nhiều phép chiếu của cùng một vật</div>
+    <h2 data-i18n="s4Title">Phòng bốn camera 4D ảo</h2>
+    <p data-i18n-html="s4Intro">Bốn camera chiếu cùng một vật 4D theo bốn hướng khác nhau thì sẽ thấy gì? Gương thật chỉ thêm góc nhìn trong 3D; camera 4D ảo thì dùng được cả tọa độ W. Dưới đây là <b>cùng một tesseract</b> qua bốn hướng chiếu 4D, hiện cùng lúc.</p>
+  </div><span class="index" data-i18n="s4Index">Bốn hình chiếu đồng bộ</span></div>
+  <div class="camera-controls">
+    <div class="cam-slider-area accent-w">
+      <div class="slider-line"><label for="cameraXWRange" data-i18n-html="cameraLabel">Xoay vật trong mặt phẳng <b>XW</b> (X và W)</label><output id="cameraXWOut" for="cameraXWRange">35°</output></div>
+      <input id="cameraXWRange" type="range" min="-180" max="180" step="1" value="35" aria-label="Góc xoay XW chung cho vật trong cả bốn camera" data-i18n-aria-label="cameraRangeLabel">
+      <div class="slider-ends"><span>−180°</span><span>0°</span><span>+180°</span></div>
+      <p class="cam-help" data-i18n-html="cameraHelp"><b>XW là mặt phẳng xoay</b>, không phải một vị trí trên trục W. Thanh này dùng chung giá trị với thanh XW ở Bước 03, nên cả năm hình dưới đây luôn ở cùng một trạng thái xoay 4D.</p>
+    </div>
+    <div class="camera-actions"><button class="btn primary" id="cameraPlay" type="button" aria-pressed="false">▶&#xFE0E; Quay XW tự động</button><button class="btn" id="cameraZero" type="button" data-i18n="cameraZero">0° cả 6 mặt phẳng</button></div>
+  </div>
+  <div class="camera-room" role="group" aria-label="Phòng camera: tesseract ở giữa, bốn hình chiếu 4D xung quanh" data-i18n-aria-label="roomLabel">
+    <div class="cam-screen cam-default"><div class="cam-title"><strong data-i18n="camDefault">01 · Mặc định</strong><small data-i18n="camDefaultNote">Hướng W gốc · không nghiêng thêm</small></div><canvas id="cameraDefault" aria-label="Hình chiếu tesseract của camera 4D mặc định" data-i18n-aria-label="camDefaultAlt"></canvas></div>
+    <div class="cam-screen cam-xw"><div class="cam-title"><strong data-i18n="camXW">02 · Camera XW</strong><small data-i18n="camXWNote">Nghiêng hướng chiếu trong XW · 38°</small></div><canvas id="cameraXW" aria-label="Hình chiếu của camera nghiêng 38° trong mặt phẳng XW" data-i18n-aria-label="camXWAlt"></canvas></div>
+    <div class="cam-core"><div class="cam-core-header"><span data-i18n="coreTitle">KHUNG DÂY 4D CHUNG</span><span class="canvas-badge" data-i18n="coreBadge">16 đỉnh · 32 cạnh</span></div><canvas id="cameraCenter" aria-label="Hình tham chiếu của tesseract, cùng góc xoay XW" data-i18n-aria-label="coreAlt"></canvas><div class="cam-core-caption" data-i18n-html="coreCaption">Hình ở giữa cũng là một <b>hình chiếu</b>, không phải cách nhìn thẳng vào vật 4D.</div></div>
+    <div class="cam-screen cam-yw"><div class="cam-title"><strong data-i18n="camYW">03 · Camera YW</strong><small data-i18n="camYWNote">Nghiêng hướng chiếu trong YW · 38°</small></div><canvas id="cameraYW" aria-label="Hình chiếu của camera nghiêng 38° trong mặt phẳng YW" data-i18n-aria-label="camYWAlt"></canvas></div>
+    <div class="cam-screen cam-zw"><div class="cam-title"><strong data-i18n="camZW">04 · Camera ZW</strong><small data-i18n="camZWNote">Nghiêng hướng chiếu trong ZW · 38°</small></div><canvas id="cameraZW" aria-label="Hình chiếu của camera nghiêng 38° trong mặt phẳng ZW" data-i18n-aria-label="camZWAlt"></canvas></div>
+  </div>
+  <div class="camera-method">
+    <div><b data-i18n="sameTitle">Điều giống nhau</b><p data-i18n-html="same">Cả bốn màn hình dùng <b>cùng 16 đỉnh, 32 cạnh và cùng góc xoay của vật</b>. Đây không phải bốn tesseract khác nhau.</p></div>
+    <div><b data-i18n="diffTitle">Điều khác nhau</b><p data-i18n-html="diff">Mỗi camera có một <b>hướng chiếu 4D cố định</b>: mặc định, hoặc nghiêng thêm 38° trong XW, YW hay ZW. Góc nhìn 3D sau phép chiếu giữ nguyên ở cả bốn.</p></div>
+    <div><b data-i18n="rememberTitle">Điều cần nhớ</b><p data-i18n-html="remember">Đây là camera <b>toán học</b>: đổi tọa độ 4D xuống 3D, rồi vẽ lên màn hình 2D. Mỗi màn hình vẫn có thể làm mất hoặc chồng thông tin.</p></div>
+  </div>
+  <div class="note"><strong data-i18n="testTitle">Phép thử:</strong><p data-i18n-html="test">Bấm <b>0° cả 6 mặt phẳng</b>, rồi kéo XW từ từ từ 0° đến 90°. Hãy so xem <b>mỗi hình đổi thế nào</b>, thay vì tìm “vị trí W” của camera. Bốn camera dùng chung một kiểu chiếu phối cảnh 4D; chúng chỉ khác nhau ở hướng đặt trước khi chiếu.</p></div>
+</div></section>
+
+<!-- Bước 05 -->
+<section class="section" id="nets"><div class="container">
+  <div class="section-head"><div>
+    <div class="eyebrow" data-i18n="s5Eyebrow">Bước 05 · Hình trải</div>
+    <h2 data-i18n="s5Title">Mở vỏ của vật: từ sáu hình vuông đến tám khối lập phương</h2>
+    <p data-i18n-html="s5Intro">Có cách nào thấy mọi phần của vật mà không để chúng chồng lên nhau? Ta mở <b>vỏ</b> của vật ra và trải xuống thấp hơn một chiều, như rọc một hộp giấy rồi trải phẳng. Kết quả gọi là <b>hình trải</b>.</p>
+  </div><span class="index" data-i18n="s5Index">Không phải lát cắt hay bóng chiếu</span></div>
+  <div class="figure-block">
+    <div class="figure-head"><h3 data-i18n="fig3Title">Hình trải: mở các “mặt” xuống một chiều thấp hơn</h3><span data-i18n="fig3Tag">HÌNH 3 · HÌNH TRẢI</span></div>
+    <figure class="figure"><div class="figure-art"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560" role="img" aria-label="Hình trải khối lập phương gồm sáu hình vuông, và hình trải tesseract gồm tám khối lập phương" data-i18n-aria-label="fig3Alt">
+<rect width="1200" height="560" rx="24" fill="#0b1728"/>
+<rect x="26" y="26" width="562" height="508" rx="20" fill="#102038" stroke="#2a4560"/>
+<rect x="612" y="26" width="562" height="508" rx="20" fill="#102038" stroke="#2a4560"/>
+<text x="58" y="69" font-family="Arial,sans-serif" font-size="24" font-weight="700" fill="#dfefff" data-i18n="fig3Cube">Mở khối lập phương</text>
+<text x="644" y="69" font-family="Arial,sans-serif" font-size="24" font-weight="700" fill="#dfefff" data-i18n="fig3Tess">Mở tesseract</text>
+<text x="58" y="101" font-family="Arial,sans-serif" font-size="16" fill="#8dcaba" data-i18n="fig3CubeSub">6 hình vuông nằm trên mặt phẳng 2D</text>
+<text x="644" y="101" font-family="Arial,sans-serif" font-size="16" fill="#8dcaba" data-i18n="fig3TessSub">8 khối lập phương trong không gian 3D</text>
+<rect x="111" y="278" width="82" height="82" rx="3" fill="#2e809b" stroke="#defbf6" stroke-width="3"/>
+<text x="152.0" y="326.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#0d2435">1</text>
+<rect x="193" y="278" width="82" height="82" rx="3" fill="#76dacd" stroke="#defbf6" stroke-width="3"/>
+<text x="234.0" y="326.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#0d2435">2</text>
+<rect x="275" y="278" width="82" height="82" rx="3" fill="#28769c" stroke="#defbf6" stroke-width="3"/>
+<text x="316.0" y="326.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#0d2435">3</text>
+<rect x="357" y="278" width="82" height="82" rx="3" fill="#60c2cc" stroke="#defbf6" stroke-width="3"/>
+<text x="398.0" y="326.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#0d2435">4</text>
+<rect x="193" y="196" width="82" height="82" rx="3" fill="#a1eee0" stroke="#defbf6" stroke-width="3"/>
+<text x="234.0" y="244.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#0d2435">5</text>
+<rect x="193" y="360" width="82" height="82" rx="3" fill="#3c9fbd" stroke="#defbf6" stroke-width="3"/>
+<text x="234.0" y="408.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#0d2435">6</text>
+<polygon points="943.24,401.46 900.90,425.24 900.90,371.30 943.24,347.52" fill="#347da9" stroke="#d0fff7" stroke-width="2.0" stroke-linejoin="round"/>
+<polygon points="852.76,404.36 900.90,425.24 900.90,371.30 852.76,350.42" fill="#4aa9bc" stroke="#d0fff7" stroke-width="2.0" stroke-linejoin="round"/>
+<polygon points="804.62,329.54 852.76,350.42 852.76,296.48 804.62,275.60" fill="#4aa9bc" stroke="#d0fff7" stroke-width="2.0" stroke-linejoin="round"/>
+<polygon points="846.96,251.82 895.10,272.70 852.76,296.48 804.62,275.60" fill="#94e4d9" stroke="#d0fff7" stroke-width="2.0" stroke-linejoin="round"/>
+<polygon points="985.58,323.74 943.24,347.52 943.24,293.58 985.58,269.80" fill="#347da9" stroke="#d0fff7" stroke-width="2.0" stroke-linejoin="round"/>
+<polygon points="937.44,248.92 985.58,269.80 943.24,293.58 895.10,272.70" fill="#94e4d9" stroke="#d0fff7" stroke-width="2.0" stroke-linejoin="round"/>
+<polygon points="943.24,293.58 900.90,317.36 900.90,263.42 943.24,239.64" fill="#347da9" stroke="#d0fff7" stroke-width="2.0" stroke-linejoin="round"/>
+<polygon points="852.76,296.48 900.90,317.36 900.90,263.42 852.76,242.54" fill="#4aa9bc" stroke="#d0fff7" stroke-width="2.0" stroke-linejoin="round"/>
+<polygon points="991.38,368.40 949.04,392.18 949.04,338.24 991.38,314.46" fill="#347da9" stroke="#d0fff7" stroke-width="2.0" stroke-linejoin="round"/>
+<polygon points="900.90,371.30 949.04,392.18 949.04,338.24 900.90,317.36" fill="#4aa9bc" stroke="#d0fff7" stroke-width="2.0" stroke-linejoin="round"/>
+<polygon points="943.24,293.58 991.38,314.46 949.04,338.24 900.90,317.36" fill="#94e4d9" stroke="#d0fff7" stroke-width="2.0" stroke-linejoin="round"/>
+<polygon points="900.90,371.30 858.56,395.08 858.56,341.14 900.90,317.36" fill="#347da9" stroke="#d0fff7" stroke-width="2.0" stroke-linejoin="round"/>
+<polygon points="810.42,374.20 858.56,395.08 858.56,341.14 810.42,320.26" fill="#4aa9bc" stroke="#d0fff7" stroke-width="2.0" stroke-linejoin="round"/>
+<polygon points="852.76,296.48 900.90,317.36 858.56,341.14 810.42,320.26" fill="#94e4d9" stroke="#d0fff7" stroke-width="2.0" stroke-linejoin="round"/>
+<polygon points="943.24,239.64 900.90,263.42 900.90,209.48 943.24,185.70" fill="#347da9" stroke="#d0fff7" stroke-width="2.0" stroke-linejoin="round"/>
+<polygon points="852.76,242.54 900.90,263.42 900.90,209.48 852.76,188.60" fill="#4aa9bc" stroke="#d0fff7" stroke-width="2.0" stroke-linejoin="round"/>
+<polygon points="895.10,164.82 943.24,185.70 900.90,209.48 852.76,188.60" fill="#94e4d9" stroke="#d0fff7" stroke-width="2.0" stroke-linejoin="round"/>
+<text x="58" y="487" font-family="Arial,sans-serif" font-size="16" fill="#aec4d8" data-i18n="fig3CubeNote">Mỗi hình vuông là một mặt của khối lập phương.</text>
+<text x="644" y="468" font-family="Arial,sans-serif" font-size="16" fill="#aec4d8" data-i18n="fig3TessNote">Cột 4 khối, thêm 4 khối quanh khối thứ ba.</text>
+<text x="644" y="494" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#80ebdc" data-i18n="fig3Total">Tổng cộng: 8 ô lập phương.</text>
+</svg></div><figcaption data-i18n-html="fig3Caption"><strong>Hình 3 — Hình trải.</strong> Vỏ khối lập phương gồm <b>6 hình vuông</b>, trải được lên mặt phẳng 2D. Vỏ tesseract gồm <b>8 ô lập phương</b>, trải được ra không gian 3D. Mỗi ô có 6 mặt và mỗi mặt vuông thuộc chung hai ô, nên tesseract có 8 × 6 ÷ 2 = 24 mặt vuông. Bên phải là một cách xếp 8 khối thành hình chữ thập. Khi gập lại trong 4D, các mặt còn hở sẽ dán vào nhau từng cặp; nhưng trong căn phòng 3D, không bàn tay nào gập được nó theo hướng thứ tư.</figcaption></figure>
+  </div>
+</div></section>
+
+<!-- Bước 06 -->
+<section class="section" id="summary"><div class="container">
+  <div class="eyebrow" data-i18n="s6Eyebrow">Bước 06 · Tổng kết</div>
+  <h2 data-i18n="s6Title">Ba cách nhìn, một cấu trúc 4D</h2>
+  <p class="section-intro" data-i18n-html="s6Intro">Lát cắt, bóng chiếu và hình trải bổ sung cho nhau. Phòng camera là <b>phần mở rộng của bóng chiếu</b>, không phải cách thứ tư.</p>
+  <div class="three-ways">
+    <div class="way"><b data-i18n="way1Title">1. Lát cắt</b><p data-i18n="way1">Vật ở chiều cao hơn đi xuyên qua thế giới của ta, ta chỉ thấy phần giao: quả cầu 3D qua mặt phẳng để lại đĩa tròn, khối cầu 4D qua không gian 3D để lại khối cầu.</p></div>
+    <div class="way"><b data-i18n="way2Title">2. Bóng chiếu</b><p data-i18n="way2">Như đèn rọi tạo bóng: cả vật bị nén xuống thấp hơn một chiều, nên các phần có thể chồng lên nhau.</p></div>
+    <div class="way"><b data-i18n="way3Title">3. Hình trải</b><p data-i18n="way3">Như rọc hộp giấy trải phẳng: 6 mặt vuông của khối lập phương trải ra 2D; 8 ô lập phương của tesseract trải ra 3D.</p></div>
+  </div>
+  <p class="checkpoint" data-i18n-html="checkpoint">Nếu bạn giải thích được vì sao <b>lát cắt</b> khác <b>bóng chiếu</b>, và vì sao hình trải tesseract gồm <b>8 khối 3D chứ không phải 8 hình vuông</b>, bạn đã nắm được ba trực giác cốt lõi.</p>
+  <div class="note"><strong data-i18n="scanTitle">Giống chụp cắt lớp:</strong><p data-i18n-html="scan">Máy chụp CT hay MRI cho ra một chồng ảnh 2D của cơ thể; xếp đúng thứ tự, bác sĩ dựng lại được hình 3D. Tương tự, ta nghiên cứu được cấu trúc toán học của vật 4D qua những hình thấp chiều hơn. Nhưng <b>hiểu cấu trúc không có nghĩa là cảm nhận trực tiếp</b> không gian 4D, và bốn hình chiếu ở Bước 04 cũng chưa đủ để dựng lại mọi vật 4D.</p></div>
+  <div class="note"><strong data-i18n="braneTitle">Từ hình học đến giả thuyết về vũ trụ</strong><p data-i18n-html="brane">Nếu về mặt toán học, không gian 3D có thể nằm trong một không gian nhiều chiều hơn, liệu vũ trụ của ta có như vậy không? Một số mô hình <i>brane-world</i> hình dung vũ trụ quan sát được nằm trên một <i>màng</i> (brane) trong một không gian nhiều chiều hơn (bulk); có mô hình xét nhiều màng. Nhưng <b>mỗi lát cắt W không tự động là một vũ trụ riêng</b>. Brane-world là giả thuyết vật lý, không phải hệ quả đã chứng minh từ việc xếp lát cắt, và đến nay chưa có bằng chứng quan sát nào được chấp nhận rộng rãi xác nhận các vũ trụ song song như vậy.</p></div>
+  <div class="caution" data-i18n-html="caution"><b>Những chỗ đã đơn giản hóa:</b> Mọi hình 4D trong trang đều vẽ qua phép chiếu xuống màn hình 2D; khối cầu 3D có tô bóng để gợi thể tích, không phải ảnh chụp vật 4D. Trong mô phỏng lát cắt, mặt cắt di chuyển qua một vật đứng yên, tương đương với vật đi xuyên qua mặt cắt theo chiều ngược lại. <b>Chuyện một vật hay một sinh vật 4D hiện ra rồi biến mất trong thế giới 3D là thí nghiệm tưởng tượng dựa trên hình học, chưa phải hiện tượng từng quan sát được.</b></div>
+</div></section>
+</main>
+
+<footer class="footer"><div class="container">
+  <div class="credit-box"><div class="credit-head"><span>© 2026 HerK</span><button class="credit-toggle" type="button" aria-expanded="true" aria-controls="credit-body" aria-label="Thu gọn" title="Thu gọn"><span class="credit-chevron" aria-hidden="true"></span></button></div>
+    <div id="credit-body">
+      <p data-i18n-html="creditNote">Nội dung được soạn với sự hỗ trợ của các công cụ AI nên có thể có sai sót. Trang chỉ dùng để tham khảo, được cung cấp nguyên trạng và không kèm bảo đảm; khi cần độ chính xác, hãy đối chiếu với sách giáo khoa hoặc nguồn chính thống.<br>Bảo lưu mọi quyền. Bạn cứ thoải mái dùng trang để học và chia sẻ đường link; muốn sao chép, đăng lại hay chỉnh sửa nội dung và mã nguồn, vui lòng xin phép tác giả trước.</p>
+      <p data-i18n="assumptions">Giả định của mô phỏng: hình học Euclid bốn chiều; khối cầu bán kính 1; tesseract có 16 đỉnh tại (±1, ±1, ±1, ±1); vật hình vòm là hợp của 129 khối cầu 4D bán kính 0,34; mọi hình chiếu đều là phép chiếu phối cảnh.</p>
+      <p><span data-i18n="sources">Nguồn đối chiếu:</span> <a href="https://mathworld.wolfram.com/Tesseract.html" target="_blank" rel="noopener noreferrer">Wolfram MathWorld — Tesseract</a> · <a href="https://www.math.union.edu/~dpvc/math/4D/sphere-slice/welcome.html" target="_blank" rel="noopener noreferrer">Union College — Slices of spheres in 2D and 3D</a></p>
+    </div>
+  </div>
+</div></footer>
+</div>
+
+</body>
+</html>
