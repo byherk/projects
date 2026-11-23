@@ -16,9 +16,9 @@
 const STRINGS = {
 	vi: {
 		pageTitle: 'Dự án · byherk',
-		metaDescription: 'Công cụ nhỏ và ứng dụng web cho việc hằng ngày, gồm cả các trang học tiếng Anh.',
+		metaDescription: 'Công cụ nhỏ và trang học tương tác: làm việc với AI, học tiếng Anh, khám phá khoa học.',
 		skipLink: 'Chuyển đến nội dung chính',
-		intro: 'Tuyển tập các công cụ và ứng dụng web hữu ích cho cuộc sống hàng ngày.',
+		intro: 'Những công cụ nhỏ và trang học tương tác, cho công việc lẫn việc học.',
 		themeToDark: 'Chuyển sang chế độ Tối',
 		themeToLight: 'Chuyển sang chế độ Sáng',
 		themeDarkTip: 'Chế độ Tối',
@@ -41,9 +41,9 @@ const STRINGS = {
 	},
 	en: {
 		pageTitle: 'Projects · byherk',
-		metaDescription: 'Small tools and web apps for everyday tasks.',
+		metaDescription: 'Small tools and interactive learning pages, from working with AI to exploring science.',
 		skipLink: 'Skip to main content',
-		intro: 'Useful tools and web apps for everyday life.',
+		intro: 'Small tools and interactive learning pages, for work and for learning.',
 		themeToDark: 'Switch to dark theme',
 		themeToLight: 'Switch to light theme',
 		themeDarkTip: 'Dark theme',
