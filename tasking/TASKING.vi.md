@@ -110,4 +110,4 @@ Owner không làm kỹ thuật thì báo đủ năm ý trên bằng lời thư�
 4. **Bảo mật:** Chỉ truy cập, xử lý và chia sẻ dữ liệu trong phạm vi được phép. Giảm thiểu dữ liệu nhạy cảm. Muốn đưa dữ liệu ra ngoài khi chưa được cấp quyền thì phải được Owner duyệt trước (luật 4).
 
 ---
-TASKING v1.4.1 · Tác giả: HerK · Giấy phép CC BY 4.0 · <https://byherk.github.io/projects/tasking/>
+TASKING v1.4.1 · Tác giả: HerK · © 2026 HerK, bảo lưu mọi quyền · <https://byherk.github.io/projects/tasking/>

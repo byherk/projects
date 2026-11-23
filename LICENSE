@@ -1,49 +1,40 @@
-Copyright (c) 2026 HerK. All rights reserved except as stated below.
+Copyright (c) 2026 HerK. All rights reserved.
 
-This repository holds the source of https://byherk.github.io/projects/.
-Different parts of it are under different terms. If a file or folder is not
-listed in sections 1 or 2, section 3 applies.
-
-
-1. TASKING (folder: tasking/)
-
-   Licensed under the Creative Commons Attribution 4.0 International License
-   (CC BY 4.0): https://creativecommons.org/licenses/by/4.0/legalcode
-
-   You may use, adapt and share it, including commercially, as long as you
-   credit the author, HerK, link back to https://byherk.github.io/projects/tasking/,
-   and indicate if changes were made.
+This repository holds the source of https://byherk.github.io/projects/ and
+every project published there, now and in the future.
 
 
-2. English learning pages
-   (folders: everyday-verbs/, everyday-prepositions/, latin-greek-roots/)
+1. What you may do
 
-   Licensed under the Creative Commons Attribution-NonCommercial-NoDerivatives
-   4.0 International License (CC BY-NC-ND 4.0):
-   https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode
-
-   You may read them and share them unchanged, for non-commercial purposes
-   only, as long as you credit the author, HerK, and link back to the page.
-   You may not use them commercially, and you may not distribute modified
-   versions.
-
-   The photos shown on the Latin & Greek Roots page are not part of this
-   repository and are not covered by this license. They are loaded from
-   Wikimedia Commons, and each belongs to its own author under the license
-   credited on the page.
+   You may use the published tools and pages for your own learning and
+   work. This includes copying the prompts and other output you create with
+   them, and sharing links to the pages.
 
 
-3. Everything else
-   (including index.html, apps.json, README.md, assets/css/ and assets/js/)
+2. What needs permission
 
-   Copyright (c) 2026 HerK. All rights reserved.
+   No other rights are granted. You may not copy, modify, republish,
+   distribute, sublicense or sell the source code, text, illustrations or
+   other content in this repository, in whole or in part, without prior
+   written permission from the author.
 
-   You may view this code on GitHub and in your browser. No permission is
-   granted to copy, modify, publish, distribute, sublicense or sell it, in
-   whole or in part, without prior written permission from the author.
+   Viewing and forking this repository on GitHub is allowed only as
+   provided by GitHub's Terms of Service; it does not grant any of the
+   rights above.
 
 
-4. Third-party material
+3. Third-party material
+
+   The following material belongs to its own authors and is not covered by
+   the copyright above.
+
+   Photos on the Latin & Greek Roots page (latin-greek-roots/) are loaded
+   from Wikimedia Commons and are not stored in this repository. Each photo
+   is credited on the page with its author and license.
+
+   Fonts are loaded from Google Fonts and are not stored in this
+   repository. Each font is under its own license, mostly the SIL Open Font
+   License 1.1.
 
    assets/icons.svg contains icons from Phosphor Icons 2.1.1
    (https://phosphoricons.com), used under the MIT License:
@@ -71,11 +62,8 @@ listed in sections 1 or 2, section 3 applies.
      TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
      SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-   Fonts are loaded from Google Fonts and are not stored in this repository.
-   Each font is under its own license, mostly the SIL Open Font License 1.1.
 
-
-5. AI assistance and no warranty
+4. AI assistance and no warranty
 
    These projects were made with the help of AI tools under the author's
    direction. Their content may contain errors and is provided for reference
@@ -88,5 +76,4 @@ listed in sections 1 or 2, section 3 applies.
    FROM, OUT OF OR IN CONNECTION WITH THESE PROJECTS OR THEIR USE.
 
 
-For permission requests beyond these terms, contact the author through
-https://github.com/byherk.
+For permission requests, contact the author through https://github.com/byherk.

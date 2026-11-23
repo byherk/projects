@@ -110,4 +110,4 @@ If the Owner is not technical, give the same five points in plain words, without
 4. **Security:** Access, process, and share data only within the permitted scope. Minimize sensitive data. Sending data outside without permission requires the Owner's prior approval (rule 4).
 
 ---
-TASKING v1.4.1 · Author: HerK · License CC BY 4.0 · <https://byherk.github.io/projects/tasking/?lang=en>
+TASKING v1.4.1 · Author: HerK · © 2026 HerK, all rights reserved · <https://byherk.github.io/projects/tasking/?lang=en>

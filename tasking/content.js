@@ -13,7 +13,7 @@ const CONTENT = {
   vi: {
     ui: {
       pageTitle: 'TASKING',
-      metaDescription: 'TASKING: biến yêu cầu thô thành prompt rõ ràng cho AI. Tác giả HerK, giấy phép CC BY 4.0.',
+      metaDescription: 'TASKING: biến yêu cầu thô thành prompt rõ ràng cho AI. Tác giả HerK.',
       brandLabel: 'TASKING, về ô Thử ngay',
       tocLabel: 'Mục lục',
       nav: { try: 'Thử ngay', compare: 'Trước & sau', templates: 'Mẫu prompt', usage: 'Cách dùng', letters: 'Bảy chữ', about: 'Về TASKING' },
@@ -74,8 +74,8 @@ const CONTENT = {
       aboutTitle: 'TASKING đến từ đâu',
       aboutBody: '<p>Từng ý trong TASKING không mới. Bộ câu hỏi 5W-2H (Why, What, Where, When, Who, How, How much) có từ lâu trong quản lý chất lượng; TASKING đổi How much thành "thế nào là đạt" và đưa ngân sách vào Giới hạn. Tiêu chí "thế nào là xong" (Definition of done) và việc kiểm tra theo mức rủi ro cũng đã quen thuộc.</p><p>Phần riêng của TASKING là gom tất cả vào một trang ngắn, đọc là làm theo được. Bộ quy tắc đã được dùng cho tài liệu học, trang mô phỏng tương tác và dashboard.</p><p>Dùng thử mà thấy chỗ nào chưa ổn, bạn góp ý giúp qua LinkedIn của tác giả nhé.</p>',
       footAuthor: 'Tác giả: <strong style="color:var(--ink)">HerK</strong>',
-      licenseTitle: 'Giấy phép',
-      licenseBody: '<a href="https://creativecommons.org/licenses/by/4.0/deed.vi" rel="noopener license">CC BY 4.0</a>. Bạn được dùng, chỉnh sửa và chia sẻ, kể cả cho mục đích thương mại, miễn là bạn ghi tên tác giả HerK và dẫn link về trang này.',
+      licenseTitle: 'Bản quyền',
+      licenseBody: '© 2026 HerK. Bảo lưu mọi quyền. Bạn cứ thoải mái dùng TASKING và các prompt nó tạo ra cho công việc của mình; muốn sao chép, đăng lại hay chỉnh sửa TASKING, vui lòng xin phép tác giả trước.',
       copied: 'Đã sao chép. Dán vào AI bạn dùng.',
       copiedBtn: 'Đã sao chép ✓',
       copyFailed: 'Chưa sao chép được. Chữ đã được bôi đen sẵn: bạn bấm Ctrl+C (Cmd+C trên Mac), hoặc nhấn giữ trên điện thoại.',
@@ -254,7 +254,7 @@ const CONTENT = {
   en: {
     ui: {
       pageTitle: 'TASKING',
-      metaDescription: 'TASKING turns a rough request into a clear prompt for AI. By HerK, licensed CC BY 4.0.',
+      metaDescription: 'TASKING turns a rough request into a clear prompt for AI. By HerK.',
       brandLabel: 'TASKING, back to Try it',
       tocLabel: 'Contents',
       nav: { try: 'Try it', compare: 'Before & after', templates: 'Templates', usage: 'How to use', letters: 'Seven letters', about: 'About' },
@@ -315,8 +315,8 @@ const CONTENT = {
       aboutTitle: 'Where TASKING comes from',
       aboutBody: '<p>None of the ideas in TASKING are new. The 5W-2H questions (Why, What, Where, When, Who, How, How much) have long been used in quality management. TASKING turns How much into "what counts as done" and moves the budget under Key limits. A definition of done and risk-based review are familiar ideas too.</p><p>What TASKING adds is putting it all on one short page you can read and follow. The same rules have been used for learning materials, interactive simulations, and dashboards.</p><p>If you try it and something doesn’t work for you, tell the author on LinkedIn.</p>',
       footAuthor: 'Author: <strong style="color:var(--ink)">HerK</strong>',
-      licenseTitle: 'License',
-      licenseBody: '<a href="https://creativecommons.org/licenses/by/4.0/deed.en" rel="noopener license">CC BY 4.0</a>. You may use, adapt, and share it, including commercially, as long as you credit the author, HerK, and link back to this page.',
+      licenseTitle: 'Copyright',
+      licenseBody: '© 2026 HerK. All rights reserved. You’re welcome to use TASKING and the prompts it creates in your own work. Please ask before copying, republishing, or adapting TASKING itself.',
       copied: 'Copied. Paste it into your AI.',
       copiedBtn: 'Copied ✓',
       copyFailed: 'Couldn’t copy. The text is selected for you: press Ctrl+C (Cmd+C on a Mac), or press and hold on a phone.',

@@ -15,9 +15,7 @@ More will come over time. Thanks for stopping by.
 
 ## Using these projects
 
-- **TASKING**: free to use, change and share, even commercially. Just credit HerK.
-- **The English learning pages**: free to read and share as they are, with credit. Please don't sell them or share edited copies.
-- **Everything else in this repo**: please ask before reusing it.
+You're welcome to use the tools and pages for your own learning and work, and to share links to them. Everything here is © HerK, all rights reserved, so please ask before copying, editing or republishing any of the code or content.
 
 I made these with help from AI tools, so mistakes can happen. Use them as a reference, not as the final word.
 
